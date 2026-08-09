@@ -185,14 +185,15 @@ section:last-of-type{border-bottom:none;}
 
 .scenario-card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px 26px; box-shadow:var(--shadow); margin-bottom:22px;}
 .scenario-card h3{font-size:18px; margin-bottom:10px;}
-.tbl-scroll{overflow-x:auto; margin-top:14px; -webkit-overflow-scrolling:touch;}
-.assump-tbl{width:100%; min-width:520px; border-collapse:collapse; font-size:13.8px;}
+.tbl-scroll{overflow-x:auto; margin-top:14px; -webkit-overflow-scrolling:touch; border-radius:8px;}
+.tbl-hint{display:none; font-size:12px; color:var(--ink-faint); margin-top:6px;}
+@media (max-width:660px){ .tbl-hint{display:block;} }
+.assump-tbl{width:100%; min-width:600px; border-collapse:collapse; font-size:13.8px; table-layout:fixed;}
 .assump-tbl th{text-align:left; font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-faint); padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap;}
-.assump-tbl td{padding:10px; border-bottom:1px solid var(--line-soft); vertical-align:top;}
-.assump-tbl td.stmt{max-width:320px;}
+.assump-tbl td{padding:10px; border-bottom:1px solid var(--line-soft); vertical-align:top; white-space:nowrap;}
+.assump-tbl td.stmt{white-space:normal;}
 @media (max-width:600px){
-  .assump-tbl{min-width:440px; font-size:13px;}
-  .assump-tbl td.stmt{max-width:200px;}
+  .assump-tbl{font-size:13px;}
 }
 .risk-badge{font-family:var(--font-mono); font-size:11px; padding:2px 8px; border-radius:100px; font-weight:700;}
 .risk-badge.high{background:var(--rust-bg); color:var(--rust);}
@@ -544,10 +545,14 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       by hand, and a reviewed draft would recover it without adding risk.</p>
       <div class="tbl-scroll">
         <table class="assump-tbl">
+          <colgroup>
+            <col style="width:66px"><col><col style="width:82px"><col style="width:104px"><col style="width:104px">
+          </colgroup>
           <thead><tr><th>ID</th><th>Statement</th><th>Risk</th><th>Evidence</th><th>Status</th></tr></thead>
           <tbody id="assump-body"></tbody>
         </table>
       </div>
+      <p class="tbl-hint">Swipe to see all columns →</p>
     </div>
 
     <div class="scenario-card">
