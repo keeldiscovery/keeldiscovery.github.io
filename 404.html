@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found — Keel Discovery</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%93%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#eef1ec; --ink:#12202b; --ink-soft:#46585d; --ink-faint:#7c8b88;
+  --navy:#1c3548; --teal:#1f6f63; --brass:#8a6420; --line:#ccd6cd;
+  --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --font-body:Seravek,"Gill Sans Nova","Ysabeau SC",Corbel,"Trebuchet MS",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d161d; --ink:#e7ede9; --ink-soft:#a8b7b4; --ink-faint:#71827f;
+    --navy:#cfe0ea; --teal:#5cc0aa; --brass:#d7ad5c; --line:#28383e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d161d; --ink:#e7ede9; --ink-soft:#a8b7b4; --ink-faint:#71827f;
+  --navy:#cfe0ea; --teal:#5cc0aa; --brass:#d7ad5c; --line:#28383e;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; min-height:100vh; background:var(--bg); color:var(--ink); font-family:var(--font-body);
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
+}
+.card{max-width:440px;}
+svg.mark{width:52px; height:40px; color:var(--brass); margin-bottom:22px;}
+h1{font-family:var(--font-display); font-size:clamp(26px,4vw,32px); color:var(--navy); margin:0 0 12px; text-wrap:balance;}
+p{color:var(--ink-soft); font-size:15.5px; line-height:1.6; margin:0 0 26px;}
+.links{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+a.btn{
+  display:inline-flex; align-items:center; gap:6px; padding:10px 18px; border-radius:8px; font-size:14px;
+  font-weight:600; text-decoration:none; border:1px solid var(--line); color:var(--ink);
+}
+a.btn.primary{background:var(--navy); color:var(--bg); border-color:var(--navy);}
+a.btn:hover{border-color:var(--teal); color:var(--teal);}
+a.btn.primary:hover{opacity:0.9; color:var(--bg);}
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="mark" viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
+    <h1>Nothing charted at this address.</h1>
+    <p>The page you're looking for doesn't exist, or moved. Here's how to get back on course.</p>
+    <div class="links">
+      <a class="btn primary" href="/">Back to keeldiscovery.com</a>
+      <a class="btn" href="https://github.com/keeldiscovery/spec-kit-keel">View on GitHub</a>
+    </div>
+  </div>
+</body>
+</html>

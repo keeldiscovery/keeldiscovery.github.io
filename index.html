@@ -3,8 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Keel Discovery: a Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<meta name="description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<link rel="canonical" href="https://keeldiscovery.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%93%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://keeldiscovery.com/">
+<meta property="og:title" content="Keel Discovery — evidence upstream of your spec">
+<meta property="og:description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<meta property="og:image" content="https://keeldiscovery.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Keel Discovery — evidence upstream of your spec">
+<meta name="twitter:description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<meta name="twitter:image" content="https://keeldiscovery.com/og.png">
 <title>Keel Discovery — evidence upstream of your spec</title>
 <style>
 :root{
@@ -63,6 +75,10 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 .navlinks a{color:var(--ink-soft); text-decoration:none; font-weight:500;}
 .navlinks a:hover{color:var(--teal);}
 .navtag{font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); border:1px solid var(--line); border-radius:100px; padding:2px 9px;}
+.navright{display:flex; align-items:center; gap:14px;}
+.iconlink{display:flex; align-items:center; color:var(--ink-soft);}
+.iconlink:hover{color:var(--teal);}
+.iconlink svg{width:19px; height:19px;}
 
 /* ---------- hero (deliberately fixed-dark, not theme-linked) ---------- */
 .hero{background:#0a141b; color:#eef2ee; padding:76px 0 0; overflow:hidden;}
@@ -204,7 +220,17 @@ section:last-of-type{border-bottom:none;}
 .brief-out p{font-size:14.5px; color:var(--ink);}
 .locked-note{font-size:13px; color:var(--ink-faint); font-style:italic;}
 
-footer{padding:40px 0; color:var(--ink-faint); font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:var(--surface-2);}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px;}
+.footer-brand .brand{margin-bottom:10px;}
+.footer-brand p{color:var(--ink-faint); font-size:13.5px; max-width:34ch; margin:0;}
+.footer-h{display:block; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; margin-bottom:10px;}
+.footer-col{display:flex; flex-direction:column; gap:8px; font-size:13.8px;}
+.footer-col a{color:var(--ink-soft); text-decoration:none;}
+.footer-col a:hover{color:var(--teal);}
+.footer-col .muted{color:var(--ink-faint); font-size:12.5px;}
+.footer-bottom{margin-top:36px; padding-top:20px; border-top:1px solid var(--line-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:12.5px; color:var(--ink-faint);}
+@media (max-width:680px){ .footer-grid{grid-template-columns:1fr;} }
 
 @media (max-width:820px){
   .why-grid, .cmd-strip{grid-template-columns:1fr;}
@@ -227,7 +253,12 @@ footer{padding:40px 0; color:var(--ink-faint); font-size:13px; display:flex; jus
       <a href="#install">Install</a>
       <a href="#tryit">Try it</a>
     </div>
-    <span class="navtag">v0.1.1</span>
+    <div class="navright">
+      <span class="navtag">v0.1.1</span>
+      <a class="iconlink" href="https://github.com/keeldiscovery/spec-kit-keel" aria-label="View source on GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -515,9 +546,31 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 </main>
 
 <footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; width:100%;">
-    <span>Apache-2.0. The Keel name and logo aren't covered by the licence — forks are welcome and must rename.</span>
-    <span>Prospective site, built to test the extension's own workflow end to end.</span>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
+          Keel
+        </a>
+        <p>Evidence-backed discovery upstream of <code>/speckit.specify</code>, and round-trip drift auditing after implementation.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-h">Project</span>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel">Source on GitHub</a>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel/blob/main/README.md">README</a>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel/issues">Report an issue</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-h">License</span>
+        <span>Apache-2.0</span>
+        <span class="muted">The Keel name and logo aren't covered by the licence — forks are welcome and must rename.</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Keel Discovery</span>
+      <span>v0.1.1</span>
+    </div>
   </div>
 </footer>
 
