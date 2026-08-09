@@ -136,6 +136,7 @@ section:last-of-type{border-bottom:none;}
   display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:start;
   background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:26px 28px; box-shadow:var(--shadow);
 }
+.gate-callout > *{min-width:0;}
 .gate-callout h3{font-size:18px; margin-bottom:8px;}
 .gate-callout p{color:var(--ink-soft); font-size:14.5px;}
 .term{
@@ -147,6 +148,7 @@ section:last-of-type{border-bottom:none;}
 
 /* install */
 .install-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:36px; align-items:start;}
+.install-grid > *{min-width:0;}
 .reqs{display:flex; flex-direction:column; gap:10px;}
 .req{display:flex; gap:10px; align-items:flex-start; font-size:14.5px; color:var(--ink-soft);}
 .req .dot{width:8px; height:8px; border-radius:50%; background:var(--teal); margin-top:6px; flex-shrink:0;}
@@ -159,7 +161,7 @@ section:last-of-type{border-bottom:none;}
 .codeblock{position:relative; margin-top:10px;}
 .codeblock pre{
   background:#0d161d; color:#d7e2df; border:1px solid #26363f; border-radius:8px; padding:13px 46px 13px 16px;
-  font-family:var(--font-mono); font-size:13px; overflow-x:auto; margin:0; white-space:pre;
+  font-family:var(--font-mono); font-size:13px; margin:0; white-space:pre-wrap; word-break:break-word; overflow-wrap:anywhere;
 }
 .copybtn{
   position:absolute; top:8px; right:8px; background:#1c2b31; color:#9fb3ad; border:1px solid #2c3d43;
@@ -183,9 +185,15 @@ section:last-of-type{border-bottom:none;}
 
 .scenario-card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px 26px; box-shadow:var(--shadow); margin-bottom:22px;}
 .scenario-card h3{font-size:18px; margin-bottom:10px;}
-.assump-tbl{width:100%; border-collapse:collapse; font-size:13.8px; margin-top:14px;}
-.assump-tbl th{text-align:left; font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-faint); padding:8px 10px; border-bottom:1px solid var(--line);}
+.tbl-scroll{overflow-x:auto; margin-top:14px; -webkit-overflow-scrolling:touch;}
+.assump-tbl{width:100%; min-width:520px; border-collapse:collapse; font-size:13.8px;}
+.assump-tbl th{text-align:left; font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-faint); padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap;}
 .assump-tbl td{padding:10px; border-bottom:1px solid var(--line-soft); vertical-align:top;}
+.assump-tbl td.stmt{max-width:320px;}
+@media (max-width:600px){
+  .assump-tbl{min-width:440px; font-size:13px;}
+  .assump-tbl td.stmt{max-width:200px;}
+}
 .risk-badge{font-family:var(--font-mono); font-size:11px; padding:2px 8px; border-radius:100px; font-weight:700;}
 .risk-badge.high{background:var(--rust-bg); color:var(--rust);}
 .risk-badge.medium{background:var(--brass-bg); color:var(--brass);}
@@ -534,10 +542,12 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       with a mandatory human-review step before anything sends. Underlying
       belief: managers lose real time every week reconstructing team status
       by hand, and a reviewed draft would recover it without adding risk.</p>
-      <table class="assump-tbl">
-        <thead><tr><th>ID</th><th>Statement</th><th>Risk</th><th>Evidence</th><th>Status</th></tr></thead>
-        <tbody id="assump-body"></tbody>
-      </table>
+      <div class="tbl-scroll">
+        <table class="assump-tbl">
+          <thead><tr><th>ID</th><th>Statement</th><th>Risk</th><th>Evidence</th><th>Status</th></tr></thead>
+          <tbody id="assump-body"></tbody>
+        </table>
+      </div>
     </div>
 
     <div class="scenario-card">
@@ -677,7 +687,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       var tr=document.createElement('tr');
       tr.innerHTML =
         '<td class="mono" style="font-weight:700; color:var(--navy);">'+id+'</td>'+
-        '<td style="max-width:320px;">'+a.statement+'</td>'+
+        '<td class="stmt">'+a.statement+'</td>'+
         '<td><span class="risk-badge '+a.risk+'">'+a.risk+'</span></td>'+
         '<td class="ev-ids">'+(a.evidence.length? a.evidence.join(', ') : '—')+'</td>'+
         '<td><span class="status-badge '+(a.status==='open'?'open':'supported')+'">'+a.status+'</span></td>';
