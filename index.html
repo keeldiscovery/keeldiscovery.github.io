@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="Keel Discovery — evidence upstream of your spec">
 <meta name="twitter:description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
 <meta name="twitter:image" content="https://keeldiscovery.com/og.png">
+<script data-goatcounter="https://keeldiscovery.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <title>Keel Discovery — evidence upstream of your spec</title>
 <style>
 :root{
@@ -248,14 +249,14 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       Keel
     </a>
     <div class="navlinks">
-      <a href="#why">Why</a>
-      <a href="#how">How it works</a>
-      <a href="#install">Install</a>
-      <a href="#tryit">Try it</a>
+      <a href="#why" data-goatcounter-click="nav-why">Why</a>
+      <a href="#how" data-goatcounter-click="nav-how">How it works</a>
+      <a href="#install" data-goatcounter-click="nav-install">Install</a>
+      <a href="#tryit" data-goatcounter-click="nav-tryit">Try it</a>
     </div>
     <div class="navright">
       <span class="navtag">v0.1.1</span>
-      <a class="iconlink" href="https://github.com/keeldiscovery/spec-kit-keel" aria-label="View source on GitHub">
+      <a class="iconlink" href="https://github.com/keeldiscovery/spec-kit-keel" aria-label="View source on GitHub" data-goatcounter-click="nav-github">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
     </div>
@@ -272,8 +273,8 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     place, and whether what shipped still agrees with the evidence once it's
     built. It brackets the core workflow rather than inserting into it.</p>
     <div class="cta-row">
-      <a class="btn primary" href="#tryit">Try the flow ↓</a>
-      <a class="btn ghost" href="#install">Install →</a>
+      <a class="btn primary" href="#tryit" data-goatcounter-click="hero-try-flow">Try the flow ↓</a>
+      <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">Install →</a>
     </div>
   </div>
   <div class="hero-diagram-band">
@@ -450,12 +451,12 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       <div>
         <div class="step">
           <span class="stepnum">1</span><h4>Install the extension</h4>
-          <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c1">copy</button></div>
+          <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-install-cmd">copy</button></div>
           <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Not in Spec Kit's bundled catalog yet, so the bare <code>specify extension add keel</code> won't resolve — the command above installs straight from this repo. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
         </div>
         <div class="step">
           <span class="stepnum">2</span><h4>Verify it installed cleanly</h4>
-          <div class="codeblock"><pre id="c2">./tests/test-install.sh</pre><button class="copybtn" data-target="c2">copy</button></div>
+          <div class="codeblock"><pre id="c2">./tests/test-install.sh</pre><button class="copybtn" data-target="c2" data-goatcounter-click="copy-verify-cmd">copy</button></div>
         </div>
         <div class="step">
           <span class="stepnum">3</span><h4>Confirm the commands are live</h4>
@@ -463,7 +464,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
-/speckit.keel.audit</pre><button class="copybtn" data-target="c3">copy</button></div>
+/speckit.keel.audit</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-commands-list">copy</button></div>
           <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes.</p>
         </div>
       </div>
@@ -538,7 +539,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 /speckit.keel.check
 
 /speckit.keel.brief</pre>
-        <button class="copybtn" data-target="c4">copy all</button>
+        <button class="copybtn" data-target="c4" data-goatcounter-click="copy-all-demo-commands">copy all</button>
       </div>
     </div>
   </div>
@@ -557,9 +558,9 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       </div>
       <div class="footer-col">
         <span class="footer-h">Project</span>
-        <a href="https://github.com/keeldiscovery/spec-kit-keel">Source on GitHub</a>
-        <a href="https://github.com/keeldiscovery/spec-kit-keel/blob/main/README.md">README</a>
-        <a href="https://github.com/keeldiscovery/spec-kit-keel/issues">Report an issue</a>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel" data-goatcounter-click="footer-github">Source on GitHub</a>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel/blob/main/README.md" data-goatcounter-click="footer-readme">README</a>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel/issues" data-goatcounter-click="footer-issues">Report an issue</a>
       </div>
       <div class="footer-col">
         <span class="footer-h">License</span>
@@ -657,7 +658,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       card.innerHTML =
         '<div class="interview-head">'+
           '<div class="left"><span class="roletag">'+iv.roleLabel+'</span><h4>'+iv.id+' — '+iv.name+'</h4></div>'+
-          '<button class="reveal-btn" '+(revealed[i]?'disabled':(locked?'disabled':''))+' data-i="'+i+'">'+(revealed[i]?'Revealed':(locked?'Locked':'Conduct interview'))+'</button>'+
+          '<button class="reveal-btn" '+(revealed[i]?'disabled':(locked?'disabled':''))+' data-i="'+i+'" data-goatcounter-click="demo-interview-'+iv.id+'">'+(revealed[i]?'Revealed':(locked?'Locked':'Conduct interview'))+'</button>'+
         '</div>'+
         '<div class="interview-body'+(revealed[i]?' open':'')+'">'+
           '<div class="qa"><div class="q">Q: '+iv.q+'</div><div class="a">'+iv.a+'</div></div>'+
@@ -705,6 +706,11 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 
     document.getElementById('brief-out').classList.toggle('unlocked', pass);
     document.getElementById('brief-locked').style.display = pass ? 'none' : 'block';
+
+    if(pass && !window.__keelDemoCompleteLogged && window.goatcounter && window.goatcounter.count){
+      window.__keelDemoCompleteLogged = true;
+      window.goatcounter.count({path:'demo-completed-brief-unlocked', title:'Demo: brief unlocked', event:true});
+    }
   }
 
   function renderStepper(){
