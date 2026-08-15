@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<meta name="description" content="A guided discovery layer for Spec Kit: real evidence before the spec, a check against it after the build.">
 <link rel="canonical" href="https://keeldiscovery.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%93%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://keeldiscovery.com/">
-<meta property="og:title" content="Keel Discovery — evidence upstream of your spec">
-<meta property="og:description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<meta property="og:title" content="Keel Discovery — prove it, then build it">
+<meta property="og:description" content="A guided discovery layer for Spec Kit: real evidence before the spec, a check against it after the build.">
 <meta property="og:image" content="https://keeldiscovery.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Keel Discovery — evidence upstream of your spec">
-<meta name="twitter:description" content="A Spec Kit extension that puts customer evidence upstream of /speckit.specify, and audits what you shipped against it afterwards.">
+<meta name="twitter:title" content="Keel Discovery — prove it, then build it">
+<meta name="twitter:description" content="A guided discovery layer for Spec Kit: real evidence before the spec, a check against it after the build.">
 <meta name="twitter:image" content="https://keeldiscovery.com/og.png">
 <script data-goatcounter="https://keeldiscovery.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<title>Keel Discovery — evidence upstream of your spec</title>
+<title>Keel Discovery — prove it, then build it</title>
 <style>
 :root{
   --bg:#eef1ec; --surface:#ffffff; --surface-2:#e5eae4;
@@ -88,6 +88,7 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 .hero h1{font-size:clamp(32px,4.6vw,50px); line-height:1.1; color:#f4f6f2; max-width:16ch;}
 .hero .dek{font-size:18px; color:#a9bab4; max-width:62ch;}
 .hero .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:4px;}
+.hero .caveat{font-size:13px; color:#6f8480; max-width:52ch; margin-top:22px; margin-bottom:0; font-style:italic;}
 .btn{
   display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:8px;
   font-size:14.5px; font-weight:600; text-decoration:none; border:1px solid transparent;
@@ -295,15 +296,19 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Spec Kit Extension</div>
-    <h1>Your spec is only as good as what it's standing on.</h1>
-    <p class="dek">Spec Kit turns a specification into working software — fast.
-    Keel is about whether the specification deserved to exist in the first
-    place, and whether what shipped still agrees with the evidence once it's
-    built. It brackets the core workflow rather than inserting into it.</p>
+    <h1>Prove it, then build it.</h1>
+    <p class="dek">Keel is a guided discovery layer for Spec Kit. It won't
+    let an idea reach a spec until real interviews back it up — a script
+    that actually blocks, not a chatbot that agrees with you. Once it does,
+    Keel hands off to Spec Kit's own pipeline to build the thing for real,
+    and checks what shipped against what you learned.</p>
     <div class="cta-row">
       <a class="btn primary" href="#tryit" data-goatcounter-click="hero-try-flow">Try the flow ↓</a>
       <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">Install →</a>
     </div>
+    <p class="caveat">Keel doesn't write your code, and it won't pad
+    evidence to make its own gate pass. It just won't let you skip finding
+    out if you're right.</p>
   </div>
   <div class="hero-diagram-band">
     <div class="wrap">
@@ -415,7 +420,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
           </g>
         </svg>
 
-        <figcaption class="diagram-caption">Keel's four commands run before <code>/speckit.specify</code> and one runs after <code>/speckit.converge</code> — it never sits inside the pipeline, only around it.</figcaption>
+        <figcaption class="diagram-caption">Keel gets you a validated brief. Spec Kit builds it. Keel checks what shipped against what you learned. One loop, idea to working software — Keel never sits inside the build itself, only around it.</figcaption>
       </figure>
     </div>
   </div>
@@ -642,7 +647,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
           <svg viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
           Keel
         </a>
-        <p>Evidence-backed discovery upstream of <code>/speckit.specify</code>, and round-trip drift auditing after implementation.</p>
+        <p>Evidence-backed discovery upstream of <code>/speckit.specify</code>, and a check afterward that the build still matches what you learned.</p>
       </div>
       <div class="footer-col">
         <span class="footer-h">Project</span>
