@@ -132,6 +132,19 @@ section:last-of-type{border-bottom:none;}
 .cmd-card.audit .glyph{background:var(--brass-bg); color:var(--brass);}
 .cmd-card code{font-size:12.5px; color:var(--navy); font-weight:600;}
 .cmd-card p{font-size:13.3px; color:var(--ink-soft); margin:0;}
+.guide-lead{
+  background:var(--surface); border:1px solid var(--teal); border-radius:12px; padding:24px 26px;
+  box-shadow:var(--shadow); margin-bottom:24px; display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;
+}
+.guide-lead .glyph{
+  width:38px; height:38px; border-radius:9px; background:var(--teal-bg); color:var(--teal);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.guide-lead .body{flex:1; min-width:240px;}
+.guide-lead h3{font-size:17.5px; margin-bottom:6px;}
+.guide-lead code{color:var(--teal); font-weight:700;}
+.guide-lead p{color:var(--ink-soft); font-size:14.5px; margin:0;}
+.cmd-strip-label{font-size:13px; color:var(--ink-faint); margin:0 0 12px; font-weight:600;}
 .gate-callout{
   display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:start;
   background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:26px 28px; box-shadow:var(--shadow);
@@ -270,7 +283,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       <a href="#tryit" data-goatcounter-click="nav-tryit">Try it</a>
     </div>
     <div class="navright">
-      <span class="navtag">v0.1.1</span>
+      <span class="navtag">v0.2.0</span>
       <a class="iconlink" href="https://github.com/keeldiscovery/spec-kit-keel" aria-label="View source on GitHub" data-goatcounter-click="nav-github">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
@@ -449,14 +462,30 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">How it works</div>
-      <h2>Five commands, bracketing the workflow you already run</h2>
-      <p>Four run before <code>/speckit.specify</code>, one runs after your
-      build is done. None of them replace a Spec Kit command — they surround it.</p>
+      <h2>One command to guide you, five if you already know the shape</h2>
+      <p>Four commands run before <code>/speckit.specify</code>, one runs after your
+      build is done. None of them replace a Spec Kit command — they surround it.
+      You don't have to sequence them yourself or track <code>A-00X</code> /
+      <code>E-00X</code> IDs — <code>/speckit.keel.guide</code> reads your
+      project's state and does that.</p>
     </div>
+    <div class="guide-lead">
+      <div class="glyph">→</div>
+      <div class="body">
+        <h3><code>/speckit.keel.guide</code></h3>
+        <p>Run it with no arguments. It figures out whether you need a
+        hypothesis, an interview, a check, or a brief — and does that step
+        inline, in plain language, referring to your assumptions and
+        evidence by what they actually say rather than by ID. Every command
+        below still works directly; <code>guide</code> is a router around
+        them, not a replacement.</p>
+      </div>
+    </div>
+    <p class="cmd-strip-label">Or run the five phases yourself:</p>
     <div class="cmd-strip">
-      <div class="cmd-card"><div class="glyph">1</div><code>keel.init</code><p>Captures the hypothesis, derives assumptions, writes a non-leading interview guide.</p></div>
+      <div class="cmd-card"><div class="glyph">1</div><code>keel.init</code><p>Captures the hypothesis, derives assumptions, writes a non-leading interview guide and an evidence-gathering plan — who to talk to, and why.</p></div>
       <div class="cmd-card"><div class="glyph">2</div><code>keel.add-evidence</code><p>Ingests one interview, extracts claims with provenance, updates assumption confidence.</p></div>
-      <div class="cmd-card"><div class="glyph">3</div><code>keel.check</code><p>Reports coverage, saturation, contradictions, and one recommended next action.</p></div>
+      <div class="cmd-card"><div class="glyph">3</div><code>keel.check</code><p>Reports coverage, saturation, and contradictions, then a five-option decision menu: pivot, gather more evidence, reduce risk, narrow the hypothesis, or proceed.</p></div>
       <div class="cmd-card"><div class="glyph">4</div><code>keel.brief</code><p>Writes constitution input and an evidence-backed brief for <code>/speckit.specify</code>.</p></div>
       <div class="cmd-card audit"><div class="glyph">5</div><code>keel.audit</code><p>Scores spec quality; with <code>keel/</code> present, diffs the build against the evidence.</p></div>
     </div>
@@ -509,12 +538,13 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
         </div>
         <div class="step">
           <span class="stepnum">3</span><h4>Confirm the commands are live</h4>
-          <div class="codeblock"><pre id="c3">/speckit.keel.init
+          <div class="codeblock"><pre id="c3">/speckit.keel.guide
+/speckit.keel.init
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
 /speckit.keel.audit</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-commands-list">copy</button></div>
-          <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes.</p>
+          <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them.</p>
         </div>
       </div>
     </div>
@@ -581,7 +611,10 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       <h3 style="font-size:17px; margin-bottom:10px;">Or run it for real</h3>
       <p class="measure" style="color:var(--ink-soft); font-size:14.5px;">Everything above is exactly what these five
       commands would produce. Paste them in order, in your own project, once
-      the extension is installed.</p>
+      the extension is installed — or paste just <code>/speckit.keel.init</code>'s
+      argument into <code>/speckit.keel.guide</code> and stay in one conversation;
+      it runs the same five phases for you and tells you when to paste the
+      next interview.</p>
       <div class="codeblock">
         <pre id="c4">/speckit.keel.init "TeamPulse Digest: a Slack bot for engineering managers that reads standup threads and drafts a weekly digest of progress, blockers, and risk, with a mandatory human-review step before anything sends. Belief: managers lose real time every week reconstructing team status by hand."
 
@@ -625,7 +658,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
     </div>
     <div class="footer-bottom">
       <span>© 2026 Keel Discovery</span>
-      <span>v0.1.1</span>
+      <span>v0.2.0</span>
     </div>
   </div>
 </footer>
