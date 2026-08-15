@@ -108,6 +108,13 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 }
 .diagram-caption{font-size:13px; color:#8ea19b; margin-top:14px; max-width:60ch;}
 
+/* ---------- qualify band (bridges hero -> why) ---------- */
+.qualify-band{background:var(--surface-2); border-bottom:1px solid var(--line-soft); padding:36px 0;}
+.qualify-band p{
+  max-width:56ch; margin:0 auto; text-align:center; font-family:var(--font-display);
+  font-size:clamp(18px,2vw,21px); line-height:1.5; color:var(--ink); text-wrap:balance;
+}
+
 /* ---------- sections ---------- */
 section{padding:64px 0; border-bottom:1px solid var(--line-soft);}
 section:last-of-type{border-bottom:none;}
@@ -425,6 +432,15 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     </div>
   </div>
 </header>
+
+<div class="qualify-band">
+  <div class="wrap">
+    <p>Built for the moment right before you'd normally just start typing
+    into <code>/speckit.specify</code>. If you've got an idea and aren't
+    sure it's worth building, Keel walks you through finding out — then
+    carries you straight into Spec Kit to make it real.</p>
+  </div>
+</div>
 
 <main>
 <section id="why">
