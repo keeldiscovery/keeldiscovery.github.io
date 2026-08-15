@@ -168,6 +168,14 @@ section:last-of-type{border-bottom:none;}
 .term .ok{color:#7fd0b0;}
 
 /* install */
+.install-toggle{display:inline-flex; gap:4px; padding:4px; background:var(--surface-2); border:1px solid var(--line); border-radius:100px; margin-bottom:32px;}
+.toggle-btn{
+  padding:9px 18px; border-radius:100px; border:none; background:transparent; color:var(--ink-soft);
+  font-family:var(--font-body); font-size:13.5px; font-weight:600;
+}
+.toggle-btn.active{background:var(--navy); color:var(--surface);}
+.toggle-btn:not(.active):hover{color:var(--ink);}
+.install-panel[hidden]{display:none;}
 .install-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:36px; align-items:start;}
 .install-grid > *{min-width:0;}
 .reqs{display:flex; flex-direction:column; gap:10px;}
@@ -538,34 +546,85 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
     <div class="section-head">
       <div class="eyebrow">Install</div>
       <h2>Add it to a Spec Kit project</h2>
-      <p>Requires Spec Kit ≥ 0.15.0 and Python 3.11+.</p>
+      <p>Requires Python 3.11+. Pick whichever matches where you're starting from — Keel is a Spec Kit extension, so it needs Spec Kit either way.</p>
     </div>
-    <div class="install-grid">
-      <div class="reqs">
-        <div class="req"><span class="dot"></span><span>Spec Kit project already initialized (<code>specify init</code>)</span></div>
-        <div class="req"><span class="dot"></span><span>Spec Kit CLI ≥ 0.15.0</span></div>
-        <div class="req"><span class="dot"></span><span>Python 3.11+ on your PATH</span></div>
-        <div class="req"><span class="dot"></span><span>bash, git, awk, sed, grep (already on macOS/Linux)</span></div>
-      </div>
-      <div>
-        <div class="step">
-          <span class="stepnum">1</span><h4>Install the extension</h4>
-          <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-install-cmd">copy</button></div>
-          <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Not in Spec Kit's bundled catalog yet, so the bare <code>specify extension add keel</code> won't resolve — the command above installs straight from this repo. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
+
+    <div class="install-toggle" role="tablist">
+      <button class="toggle-btn active" type="button" data-panel="have" role="tab" aria-selected="true" data-goatcounter-click="install-toggle-have">I already have Spec Kit</button>
+      <button class="toggle-btn" type="button" data-panel="new" role="tab" aria-selected="false" data-goatcounter-click="install-toggle-new">I don't have Spec Kit yet</button>
+    </div>
+
+    <div class="install-panel" data-panel="have">
+      <div class="install-grid">
+        <div class="reqs">
+          <div class="req"><span class="dot"></span><span>Spec Kit project already initialized (<code>specify init</code>)</span></div>
+          <div class="req"><span class="dot"></span><span>Spec Kit CLI ≥ 0.15.0</span></div>
+          <div class="req"><span class="dot"></span><span>Python 3.11+ on your PATH</span></div>
+          <div class="req"><span class="dot"></span><span>bash, git, awk, sed, grep (already on macOS/Linux)</span></div>
         </div>
-        <div class="step">
-          <span class="stepnum">2</span><h4>Verify it installed cleanly</h4>
-          <div class="codeblock"><pre id="c2">./tests/test-install.sh</pre><button class="copybtn" data-target="c2" data-goatcounter-click="copy-verify-cmd">copy</button></div>
-        </div>
-        <div class="step">
-          <span class="stepnum">3</span><h4>Confirm the commands are live</h4>
-          <div class="codeblock"><pre id="c3">/speckit.keel.guide
+        <div>
+          <div class="step">
+            <span class="stepnum">1</span><h4>Install the extension</h4>
+            <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-install-cmd">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Not in Spec Kit's bundled catalog yet, so the bare <code>specify extension add keel</code> won't resolve — the command above installs straight from this repo. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
+          </div>
+          <div class="step">
+            <span class="stepnum">2</span><h4>Verify it installed cleanly</h4>
+            <div class="codeblock"><pre id="c2">./tests/test-install.sh</pre><button class="copybtn" data-target="c2" data-goatcounter-click="copy-verify-cmd">copy</button></div>
+          </div>
+          <div class="step">
+            <span class="stepnum">3</span><h4>Confirm the commands are live</h4>
+            <div class="codeblock"><pre id="c3">/speckit.keel.guide
 /speckit.keel.init
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
 /speckit.keel.audit</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-commands-list">copy</button></div>
-          <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them.</p>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="install-panel" data-panel="new" hidden>
+      <div class="install-grid">
+        <div class="reqs">
+          <div class="req"><span class="dot"></span><span><a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener">uv</a> installed (Spec Kit's own installer requires it)</span></div>
+          <div class="req"><span class="dot"></span><span>Python 3.11+ on your PATH</span></div>
+          <div class="req"><span class="dot"></span><span>bash, git, awk, sed, grep (already on macOS/Linux)</span></div>
+          <div class="req"><span class="dot"></span><span>A coding agent that supports Spec Kit (Claude Code, Copilot, and others)</span></div>
+        </div>
+        <div>
+          <div class="step">
+            <span class="stepnum">1</span><h4>Install the Specify CLI</h4>
+            <div class="codeblock"><pre id="c5">uv tool install specify-cli</pre><button class="copybtn" data-target="c5" data-goatcounter-click="copy-uv-install-cmd">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Installs from PyPI. Prefer pinning a release? Spec Kit's own README has the <code>git+https://...@vX.Y.Z</code> form.</p>
+          </div>
+          <div class="step">
+            <span class="stepnum">2</span><h4>Initialize a Spec Kit project</h4>
+            <div class="codeblock"><pre id="c6">specify init my-project --integration claude
+cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-click="copy-specify-init-cmd">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Swap <code>claude</code> for whichever agent you use — <code>copilot</code>, <code>gemini</code>, and others are also supported.</p>
+          </div>
+          <div class="step">
+            <span class="stepnum">3</span><h4>Install the Keel extension</h4>
+            <div class="codeblock"><pre id="c7">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c7" data-goatcounter-click="copy-install-cmd-new">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Not in Spec Kit's bundled catalog yet, so the bare <code>specify extension add keel</code> won't resolve — the command above installs straight from this repo. Spec Kit will ask you to confirm the external source (<code>y</code>) once.</p>
+          </div>
+          <div class="step">
+            <span class="stepnum">4</span><h4>Verify it installed cleanly</h4>
+            <div class="codeblock"><pre id="c8">./tests/test-install.sh</pre><button class="copybtn" data-target="c8" data-goatcounter-click="copy-verify-cmd-new">copy</button></div>
+          </div>
+          <div class="step">
+            <span class="stepnum">5</span><h4>Confirm the commands are live</h4>
+            <div class="codeblock"><pre id="c9">/speckit.keel.guide
+/speckit.keel.init
+/speckit.keel.add-evidence
+/speckit.keel.check
+/speckit.keel.brief
+/speckit.keel.audit</pre><button class="copybtn" data-target="c9" data-goatcounter-click="copy-commands-list-new">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -859,6 +918,23 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
     try{ document.execCommand('copy'); }catch(e){}
     document.body.removeChild(ta);
   }
+})();
+
+(function(){
+  var buttons = document.querySelectorAll('.install-toggle .toggle-btn');
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var which = btn.getAttribute('data-panel');
+      buttons.forEach(function(b){
+        var active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('.install-panel').forEach(function(panel){
+        panel.hidden = panel.getAttribute('data-panel') !== which;
+      });
+    });
+  });
 })();
 </script>
 </body>
