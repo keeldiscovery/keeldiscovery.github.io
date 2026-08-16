@@ -96,15 +96,22 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 .btn.primary:hover{background:color-mix(in srgb, var(--brass) 85%, black);}
 .btn.ghost{border-color:var(--line); color:var(--ink);}
 .btn.ghost:hover{border-color:var(--brass); color:var(--brass);}
-.workflow-diagram{margin:0 0 28px;}
-.workflow-diagram svg{width:100%; height:auto;}
-.workflow-diagram svg.diagram-desktop{display:block;}
-.workflow-diagram svg.diagram-mobile{display:none; max-width:340px; margin:0 auto;}
-@media (max-width:720px){
-  .workflow-diagram svg.diagram-desktop{display:none;}
-  .workflow-diagram svg.diagram-mobile{display:block;}
+/* ---------- how Keel fits (compact, top of #install) ---------- */
+.how-fit{background:var(--surface-2); border:1px solid var(--line); border-radius:12px; padding:22px 24px; margin-bottom:32px;}
+.how-fit h3{font-size:17px; margin-bottom:8px;}
+.how-fit p{color:var(--ink-soft); font-size:14.5px; margin:0 0 18px;}
+.mini-flow{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+.mini-flow-step{
+  background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 16px;
+  display:flex; flex-direction:column; gap:3px; min-width:130px;
 }
-.diagram-caption{font-size:13px; color:var(--ink-faint); margin-top:14px; max-width:60ch;}
+.mini-flow-label{font-family:var(--font-mono); font-size:11px; letter-spacing:0.03em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+.mini-flow-value{font-size:13.5px; color:var(--ink); font-family:var(--font-mono); font-weight:600;}
+.mini-flow-arrow{color:var(--ink-faint); font-size:16px; flex-shrink:0;}
+@media (max-width:560px){
+  .mini-flow{flex-direction:column; align-items:stretch;}
+  .mini-flow-arrow{transform:rotate(90deg); text-align:center;}
+}
 
 /* ---------- persona-style card grid (reused by #newfounder's continue-choice) ---------- */
 .persona-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:840px; margin:0 auto;}
@@ -327,23 +334,21 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       <div class="output-chip"><span class="dot"></span>Validated product brief</div>
       <div class="output-chip"><span class="dot"></span>Post-build drift audit</div>
     </div>
-    <div class="cta-row" style="margin-top:32px;">
-      <a class="btn primary" href="/showcase/" data-goatcounter-click="newfounder-worked-example">See it run, start to finish →</a>
-    </div>
-
-    <h3 style="font-size:16px; margin:40px 0 4px;">How would you like to continue?</h3>
-    <div class="persona-grid" style="max-width:none; margin:16px 0 0;">
-      <div class="persona-card">
-        <span class="tag">Option 1</span>
-        <h3>Try it myself</h3>
-        <p>Install Keel once. After setup, <code>/speckit.keel.guide</code> is the only command you need to remember. It will determine your current stage and guide your next step.</p>
-        <button class="btn primary" type="button" id="setup-myself-btn" data-goatcounter-click="newfounder-setup-myself">Set it up myself</button>
-      </div>
-      <div class="persona-card">
-        <span class="tag">Option 2</span>
-        <h3>Tell us where you're stuck</h3>
-        <p>We're learning where founders need additional guidance. Tell us what you're trying to accomplish and where you are getting stuck. This is not a sales form, and there is no commitment.</p>
-        <a class="btn ghost" id="founder-help-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">Tell us where you're stuck</a>
+    <div id="continue">
+      <h3 style="font-size:16px; margin:40px 0 4px;">How would you like to continue?</h3>
+      <div class="persona-grid" style="max-width:none; margin:16px 0 0;">
+        <div class="persona-card">
+          <span class="tag">Option 1</span>
+          <h3>Set up Keel myself</h3>
+          <p>Install Keel once. After setup, <code>/speckit.keel.guide</code> is the only command you need to remember. It will determine your current stage and guide your next step.</p>
+          <button class="btn primary" type="button" id="setup-myself-btn" data-goatcounter-click="newfounder-setup-myself">Set it up myself</button>
+        </div>
+        <div class="persona-card">
+          <span class="tag">Option 2</span>
+          <h3>Tell us where you're stuck</h3>
+          <p>We're learning where founders need additional guidance. Tell us what you're trying to accomplish and where you are getting stuck. This is not a sales form, and there is no commitment.</p>
+          <a class="btn ghost" id="founder-help-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">Tell us where you're stuck</a>
+        </div>
       </div>
     </div>
   </div>
@@ -396,148 +401,35 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
   </div>
 </section>
 
-<section id="how">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">How it works</div>
-      <h2>One command to guide you, five if you already know the shape</h2>
-      <p>Four commands run before <code>/speckit.specify</code>, one runs after your
-      build is done. None of them replace a Spec Kit command — they surround it.
-      You don't have to sequence them yourself or track <code>A-00X</code> /
-      <code>E-00X</code> IDs — <code>/speckit.keel.guide</code> reads your
-      project's state and does that.</p>
-    </div>
-    <figure class="workflow-diagram">
-      <svg class="diagram-desktop" viewBox="0 0 920 170" role="img" aria-label="Speckit keel guide validates your idea against real evidence, hands off a brief to Spec Kit's own pipeline to build it for real, and guide closes the loop afterward by checking what shipped against what you learned.">
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/>
-          </marker>
-        </defs>
-        <g font-family="ui-monospace,SFMono-Regular,Consolas,monospace">
-          <g font-size="10.5" text-anchor="middle">
-            <text x="275" y="20" style="fill:var(--teal)">hands off keel/brief.md</text>
-            <text x="645" y="20" style="fill:var(--brass)">after converge</text>
-          </g>
-
-          <!-- box 1: guide, pre-build -->
-          <rect x="20" y="40" width="220" height="80" rx="8" style="stroke:var(--brass)" fill="none"/>
-          <text x="130" y="66" style="fill:var(--brass)" font-size="13" font-weight="700" text-anchor="middle">/speckit.keel.guide</text>
-          <text x="130" y="87" style="fill:var(--ink-faint)" font-size="10.5" text-anchor="middle">validates your idea</text>
-          <text x="130" y="101" style="fill:var(--ink-faint)" font-size="10.5" text-anchor="middle">against real evidence</text>
-
-          <!-- box 2: spec kit builds it -->
-          <rect x="310" y="40" width="300" height="80" rx="8" style="stroke:var(--ink-faint)" fill="none"/>
-          <text x="460" y="66" style="fill:var(--ink)" font-size="13" font-weight="700" text-anchor="middle">Spec Kit builds it</text>
-          <text x="460" y="87" style="fill:var(--ink-faint)" font-size="10.5" text-anchor="middle">constitution &#8594; specify &#8594; plan &#8594;</text>
-          <text x="460" y="101" style="fill:var(--ink-faint)" font-size="10.5" text-anchor="middle">tasks &#8594; implement &#8594; converge</text>
-
-          <!-- box 3: guide, post-build -->
-          <rect x="680" y="40" width="220" height="80" rx="8" style="stroke:var(--brass)" fill="none"/>
-          <text x="790" y="66" style="fill:var(--brass)" font-size="13" font-weight="700" text-anchor="middle">/speckit.keel.guide</text>
-          <text x="790" y="87" style="fill:var(--ink-faint)" font-size="10.5" text-anchor="middle">checks what shipped</text>
-          <text x="790" y="101" style="fill:var(--ink-faint)" font-size="10.5" text-anchor="middle">against what you learned</text>
-
-          <g marker-end="url(#arrow)">
-            <line x1="240" y1="80" x2="306" y2="80" style="stroke:var(--teal)"/>
-            <line x1="610" y1="80" x2="676" y2="80" style="stroke:var(--brass)"/>
-          </g>
-        </g>
-      </svg>
-
-      <svg class="diagram-mobile" viewBox="0 0 320 410" role="img" aria-label="Speckit keel guide validates your idea against real evidence, hands off a brief to Spec Kit's own pipeline to build it for real, and guide closes the loop afterward by checking what shipped against what you learned.">
-        <defs>
-          <marker id="arrow-m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/>
-          </marker>
-        </defs>
-        <g font-family="ui-monospace,SFMono-Regular,Consolas,monospace">
-          <!-- block 1: guide, pre-build -->
-          <rect x="20" y="20" width="280" height="100" rx="8" style="stroke:var(--brass)" fill="none"/>
-          <text x="160" y="48" style="fill:var(--brass)" font-size="13" font-weight="700" text-anchor="middle">/speckit.keel.guide</text>
-          <text x="160" y="72" style="fill:var(--ink-faint)" font-size="11.5" text-anchor="middle">validates your idea</text>
-          <text x="160" y="90" style="fill:var(--ink-faint)" font-size="11.5" text-anchor="middle">against real evidence</text>
-
-          <line x1="160" y1="120" x2="160" y2="150" style="stroke:var(--teal)" marker-end="url(#arrow-m)"/>
-          <text x="172" y="138" style="fill:var(--teal)" font-size="10" text-anchor="start">hands off brief.md</text>
-
-          <!-- block 2: spec kit builds it -->
-          <rect x="20" y="150" width="280" height="110" rx="8" style="stroke:var(--ink-faint)" fill="none"/>
-          <text x="160" y="178" style="fill:var(--ink)" font-size="13" font-weight="700" text-anchor="middle">Spec Kit builds it</text>
-          <text x="160" y="202" style="fill:var(--ink-faint)" font-size="11.5" text-anchor="middle">constitution &#8594; specify &#8594; plan &#8594;</text>
-          <text x="160" y="220" style="fill:var(--ink-faint)" font-size="11.5" text-anchor="middle">tasks &#8594; implement &#8594; converge</text>
-
-          <line x1="160" y1="260" x2="160" y2="290" style="stroke:var(--brass)" marker-end="url(#arrow-m)"/>
-          <text x="172" y="278" style="fill:var(--brass)" font-size="10" text-anchor="start">after converge</text>
-
-          <!-- block 3: guide, post-build -->
-          <rect x="20" y="290" width="280" height="100" rx="8" style="stroke:var(--brass)" fill="none"/>
-          <text x="160" y="318" style="fill:var(--brass)" font-size="13" font-weight="700" text-anchor="middle">/speckit.keel.guide</text>
-          <text x="160" y="342" style="fill:var(--ink-faint)" font-size="11.5" text-anchor="middle">checks what shipped</text>
-          <text x="160" y="360" style="fill:var(--ink-faint)" font-size="11.5" text-anchor="middle">against what you learned</text>
-        </g>
-      </svg>
-
-      <figcaption class="diagram-caption">Keel gets you a validated brief. Spec Kit builds it. Keel checks what shipped against what you learned. One loop, idea to working software — Keel never sits inside the build itself, only around it.</figcaption>
-    </figure>
-    <div class="guide-lead">
-      <div class="glyph">→</div>
-      <div class="body">
-        <h3><code>/speckit.keel.guide</code></h3>
-        <p>Run it with no arguments. It figures out whether you need a
-        hypothesis, an interview, a check, or a brief — and does that step
-        inline, in plain language, referring to your assumptions and
-        evidence by what they actually say rather than by ID. That's the
-        whole interface: one command, start to finish.</p>
-        <details class="phases-disclosure">
-          <summary>What <code>guide</code> actually runs underneath — five phases <span class="chev" aria-hidden="true"></span></summary>
-          <div class="phases-list">
-            <div class="phase-row"><code>keel.init</code><p>Captures the hypothesis, derives assumptions, writes a non-leading interview guide and an evidence-gathering plan — who to talk to, and why.</p></div>
-            <div class="phase-row"><code>keel.add-evidence</code><p>Ingests one interview, extracts claims with provenance, updates assumption confidence.</p></div>
-            <div class="phase-row"><code>keel.check</code><p>Reports coverage, saturation, and contradictions, then a five-option decision menu: pivot, gather more evidence, reduce risk, narrow the hypothesis, or proceed.</p></div>
-            <div class="phase-row"><code>keel.brief</code><p>Writes constitution input and an evidence-backed brief for <code>/speckit.specify</code>.</p></div>
-            <div class="phase-row"><code>keel.audit</code><p>Scores spec quality; with <code>keel/</code> present, diffs the build against the evidence.</p></div>
-          </div>
-          <p class="phases-note">Each one also works as a direct command — <code>/speckit.keel.init</code>, <code>/speckit.keel.check</code>, and so on — if you already know exactly which phase you're in. <code>guide</code> is a router around them, not a replacement.</p>
-        </details>
-      </div>
-    </div>
-    <div class="gate-callout">
-      <div>
-        <h3>The gate blocks the brief, by exit code</h3>
-        <p><code>keel-gate.sh</code> runs at the top of every Keel command.
-        <code>/speckit.keel.brief</code> is blocked while any high-risk
-        assumption is unvalidated, evidence is thin, or all of it comes from
-        a single participant role — not as a suggestion to your agent, as an
-        exit code.</p>
-        <p>Thresholds live in <code>keel-config.yml</code>. You can lower
-        them; the override gets recorded so <code>keel.audit</code> can
-        surface it later. Keel doesn't write your code either, and it won't
-        pad evidence to make its own gate pass.</p>
-        <p style="margin-bottom:0;">This only covers Keel's own commands —
-        it can't stop someone from skipping Keel entirely and running
-        <code>/speckit.specify</code> straight away. The hook that offers
-        to run <code>check</code> before planning is opt-in, not forced,
-        precisely so a project with no <code>keel/</code> directory is
-        never blocked by a gate it never opted into.</p>
-      </div>
-      <div class="term">$ bash keel-gate.sh brief
-evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   contradictions: 0
-<span class="rust">BLOCKED: only 2 evidence files, minimum is 3.</span>
-  -&gt; Run /speckit.keel.add-evidence after more interviews.
-<span class="rust">BLOCKED: 1 high-risk assumption(s) still unvalidated.</span>
-  -&gt; Validate them, downgrade the risk with a reason, or
-     add 'override: A-XXX' to keel/decisions.md.</div>
-    </div>
-  </div>
-</section>
-
 <section id="install">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Install</div>
       <h2>Add it to a Spec Kit project</h2>
       <p>Requires Python 3.11+. Pick whichever matches where you're starting from — Keel is a Spec Kit extension, so it needs Spec Kit either way.</p>
+    </div>
+
+    <div id="how" class="how-fit">
+      <h3>How Keel fits with Spec Kit</h3>
+      <p>Keel works around Spec Kit, not inside it. It validates the idea
+      before <code>/speckit.specify</code>, hands Spec Kit an
+      evidence-backed brief, and checks the finished product afterward.</p>
+      <div class="mini-flow">
+        <div class="mini-flow-step">
+          <span class="mini-flow-label">Validate</span>
+          <code class="mini-flow-value">/speckit.keel.guide</code>
+        </div>
+        <div class="mini-flow-arrow" aria-hidden="true">→</div>
+        <div class="mini-flow-step">
+          <span class="mini-flow-label">Build</span>
+          <span class="mini-flow-value">Spec Kit</span>
+        </div>
+        <div class="mini-flow-arrow" aria-hidden="true">→</div>
+        <div class="mini-flow-step">
+          <span class="mini-flow-label">Check what shipped</span>
+          <code class="mini-flow-value">/speckit.keel.guide</code>
+        </div>
+      </div>
     </div>
 
     <div class="install-toggle" role="tablist">
@@ -560,14 +452,17 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
             <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Keel is listed in Spec Kit's community catalog, but the entry is still syncing to v0.2.0 — until that update lands, the bare <code>specify extension add keel</code> will resolve the older v0.1.1. The command above installs the pinned v0.2.0 release directly, so you don't need to wait. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
           </div>
           <div class="step">
-            <span class="stepnum">2</span><h4>Confirm the commands are live</h4>
-            <div class="codeblock"><pre id="c3">/speckit.keel.guide
-/speckit.keel.init
+            <span class="stepnum">2</span><h4>Start Keel</h4>
+            <div class="codeblock"><pre id="c3">/speckit.keel.guide</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-start-keel">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">This is the only command most users need. Keel reads the current project state, determines the next step, and guides you through it.</p>
+            <details class="phases-disclosure">
+              <summary>Advanced: Show individual Keel commands <span class="chev" aria-hidden="true"></span></summary>
+              <div class="codeblock" style="margin-top:14px;"><pre id="c10">/speckit.keel.init
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
-/speckit.keel.audit</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-commands-list">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them. Shown here with dots — some agents register skill names with dashes instead (Claude Code shows this one as <code>/speckit-keel-guide</code>); it's the same command either way.</p>
+/speckit.keel.audit</pre><button class="copybtn" data-target="c10" data-goatcounter-click="copy-advanced-commands">copy</button></div>
+            </details>
           </div>
         </div>
       </div>
@@ -599,18 +494,65 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
             <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Keel is listed in Spec Kit's community catalog, but the entry is still syncing to v0.2.0 — until that update lands, the bare <code>specify extension add keel</code> will resolve the older v0.1.1. The command above installs the pinned v0.2.0 release directly, so you don't need to wait.</p>
           </div>
           <div class="step">
-            <span class="stepnum">4</span><h4>Confirm the commands are live</h4>
-            <div class="codeblock"><pre id="c9">/speckit.keel.guide
-/speckit.keel.init
+            <span class="stepnum">4</span><h4>Start Keel</h4>
+            <div class="codeblock"><pre id="c9">/speckit.keel.guide</pre><button class="copybtn" data-target="c9" data-goatcounter-click="copy-start-keel-new">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">This is the only command most users need. Keel reads the current project state, determines the next step, and guides you through it.</p>
+            <details class="phases-disclosure">
+              <summary>Advanced: Show individual Keel commands <span class="chev" aria-hidden="true"></span></summary>
+              <div class="codeblock" style="margin-top:14px;"><pre id="c11">/speckit.keel.init
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
-/speckit.keel.audit</pre><button class="copybtn" data-target="c9" data-goatcounter-click="copy-commands-list-new">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them. Shown here with dots — some agents register skill names with dashes instead (Claude Code shows this one as <code>/speckit-keel-guide</code>); it's the same command either way.</p>
+/speckit.keel.audit</pre><button class="copybtn" data-target="c11" data-goatcounter-click="copy-advanced-commands-new">copy</button></div>
+            </details>
           </div>
         </div>
       </div>
     </div>
+
+    <details class="phases-disclosure" style="margin-top:40px; border-top:1px solid var(--line-soft); padding-top:24px;">
+      <summary>Technical details: Five phases and enforcement gate <span class="chev" aria-hidden="true"></span></summary>
+      <div style="margin-top:20px;">
+        <h4 style="font-size:15px; margin-bottom:4px;">Five internal phases</h4>
+        <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 8px;"><code>/speckit.keel.guide</code> reads your project's state and routes through these five phases inline — you don't have to sequence them yourself or track <code>A-00X</code> / <code>E-00X</code> IDs.</p>
+        <div class="phases-list">
+          <div class="phase-row"><code>keel.init</code><p>Captures the hypothesis, derives assumptions, writes a non-leading interview guide and an evidence-gathering plan — who to talk to, and why.</p></div>
+          <div class="phase-row"><code>keel.add-evidence</code><p>Ingests one interview, extracts claims with provenance, updates assumption confidence.</p></div>
+          <div class="phase-row"><code>keel.check</code><p>Reports coverage, saturation, and contradictions, then a five-option decision menu: pivot, gather more evidence, reduce risk, narrow the hypothesis, or proceed.</p></div>
+          <div class="phase-row"><code>keel.brief</code><p>Writes constitution input and an evidence-backed brief for <code>/speckit.specify</code>.</p></div>
+          <div class="phase-row"><code>keel.audit</code><p>Scores spec quality; with <code>keel/</code> present, diffs the build against the evidence.</p></div>
+        </div>
+        <p class="phases-note">Each one also works as a direct command — <code>/speckit.keel.init</code>, <code>/speckit.keel.check</code>, and so on — if you already know exactly which phase you're in. <code>guide</code> is a router around them, not a replacement.</p>
+
+        <div class="gate-callout" style="margin-top:24px;">
+          <div>
+            <h3>The gate blocks the brief, by exit code</h3>
+            <p><code>keel-gate.sh</code> runs at the top of every Keel command.
+            <code>/speckit.keel.brief</code> is blocked while any high-risk
+            assumption is unvalidated, evidence is thin, or all of it comes from
+            a single participant role — not as a suggestion to your agent, as an
+            exit code.</p>
+            <p>Thresholds live in <code>keel-config.yml</code>. You can lower
+            them; the override gets recorded so <code>keel.audit</code> can
+            surface it later. Keel doesn't write your code either, and it won't
+            pad evidence to make its own gate pass.</p>
+            <p style="margin-bottom:0;">This only covers Keel's own commands —
+            it can't stop someone from skipping Keel entirely and running
+            <code>/speckit.specify</code> straight away. The hook that offers
+            to run <code>check</code> before planning is opt-in, not forced,
+            precisely so a project with no <code>keel/</code> directory is
+            never blocked by a gate it never opted into.</p>
+          </div>
+          <div class="term">$ bash keel-gate.sh brief
+evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   contradictions: 0
+<span class="rust">BLOCKED: only 2 evidence files, minimum is 3.</span>
+  -&gt; Run /speckit.keel.add-evidence after more interviews.
+<span class="rust">BLOCKED: 1 high-risk assumption(s) still unvalidated.</span>
+  -&gt; Validate them, downgrade the risk with a reason, or
+     add 'override: A-XXX' to keel/decisions.md.</div>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -694,14 +636,25 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
   var surveyLink = document.getElementById('founder-help-survey-link');
   if(surveyLink) surveyLink.href = FOUNDER_HELP_SURVEY_URL;
 
+  function selectBeginnerInstallTab(){
+    var newTabBtn = document.querySelector('.install-toggle .toggle-btn[data-panel="new"]');
+    if(newTabBtn) newTabBtn.click();
+  }
+
   var setupBtn = document.getElementById('setup-myself-btn');
   if(setupBtn){
     setupBtn.addEventListener('click', function(){
-      var newTabBtn = document.querySelector('.install-toggle .toggle-btn[data-panel="new"]');
-      if(newTabBtn) newTabBtn.click();
+      selectBeginnerInstallTab();
       var installSection = document.getElementById('install');
       if(installSection) installSection.scrollIntoView({behavior:'smooth', block:'start'});
     });
+  }
+
+  // Cross-page equivalent: a link like /?setup=1#install (e.g. from the
+  // showcase page) lands here with the browser already scrolling to
+  // #install via the hash; this just also selects the beginner tab.
+  if(/(?:^|[?&])setup=1(?:&|$)/.test(location.search)){
+    selectBeginnerInstallTab();
   }
 })();
 </script>

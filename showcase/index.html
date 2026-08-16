@@ -179,6 +179,8 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 
 /* ---------- showcase-page-only additions, same visual language ---------- */
 .sc-hero{padding:64px 0 0;}
+.back-link{display:inline-block; font-size:13.5px; color:var(--ink-faint); text-decoration:none; margin-bottom:18px;}
+.back-link:hover{color:var(--brass);}
 .sc-hero .eyebrow{font-family:var(--font-body); font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--brass); font-weight:700; margin-bottom:14px;}
 .sc-hero h1{font-size:clamp(32px,5.4vw,52px); line-height:1.06; max-width:19ch;}
 .sc-hero .dek{font-size:18px; color:var(--ink-soft); max-width:62ch; margin-top:18px;}
@@ -251,9 +253,8 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     </a>
     <div class="navlinks">
       <a href="/#why" data-goatcounter-click="showcase-nav-why">Why</a>
-      <a href="/#how" data-goatcounter-click="showcase-nav-how">How it works</a>
+      <a href="/#continue" data-goatcounter-click="showcase-nav-continue">Get started</a>
       <a href="/#install" data-goatcounter-click="showcase-nav-install">Install</a>
-      <a href="/#tryit" data-goatcounter-click="showcase-nav-tryit">Try it</a>
       <a href="/showcase/" class="current" data-goatcounter-click="showcase-nav-showcase">Showcase</a>
     </div>
     <div class="navright">
@@ -267,6 +268,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 
 <header class="sc-hero">
   <div class="wrap">
+    <a class="back-link" href="/#continue" data-goatcounter-click="showcase-back-to-options">← Back to my options</a>
     <div class="eyebrow">A showcase — dogfooding feature/guided-validation-workflow</div>
     <h1>One idea, run through the real gate, start to finish.</h1>
     <p class="dek">Not a demo written to look good. ShipLog is the literal output of one real pass through Keel and Spec Kit — a hypothesis, four interviews, a gate that actually blocked and then passed, a shipped app verified against live GitHub data, and an audit that scored the drift. Here's the whole trail.</p>
@@ -458,7 +460,14 @@ cd shiplog/app && python3 -m http.server 8000</pre>
       </div>
       <div class="cta-row">
         <a class="btn primary" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-cta-repo">View the repo →</a>
-        <a class="btn ghost" href="/#install" data-goatcounter-click="showcase-cta-install">Install Keel on your own idea →</a>
+      </div>
+    </div>
+
+    <div class="cta-final" style="margin-top:20px;">
+      <h3>Ready to use Keel on your idea?</h3>
+      <div class="cta-row">
+        <a class="btn primary" href="/?setup=1#install" data-goatcounter-click="showcase-setup-myself">Set up Keel myself</a>
+        <a class="btn ghost" id="showcase-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">I need some guidance</a>
       </div>
     </div>
   </div>
@@ -495,6 +504,17 @@ cd shiplog/app && python3 -m http.server 8000</pre>
 </footer>
 
 <script>
+(function(){
+  // Single source of truth for this page's founder-help-survey link — mirrors
+  // index.html's FOUNDER_HELP_SURVEY_URL constant (separate document, can't
+  // share the JS variable, but the same "one place, not scattered" rule
+  // applies here). "Keel Founder Help Discovery" SurveyMonkey Web Link
+  // collector.
+  var FOUNDER_HELP_SURVEY_URL = "https://www.surveymonkey.com/r/9PDSD25";
+  var surveyLink = document.getElementById('showcase-survey-link');
+  if(surveyLink) surveyLink.href = FOUNDER_HELP_SURVEY_URL;
+})();
+
 document.querySelectorAll('.copybtn').forEach(function(btn){
   btn.addEventListener('click', function(){
     var target = document.getElementById(btn.getAttribute('data-target'));
