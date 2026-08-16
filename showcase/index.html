@@ -22,7 +22,7 @@
 <style>
 :root{
   --bg:#ffffff; --surface:#ffffff; --surface-2:#f0efeb;
-  --ink:#191a18; --ink-soft:#5c5d59; --ink-faint:#8a8b86;
+  --ink:#191a18; --ink-soft:#5c5d59; --ink-faint:#666862;
   --line:#e3e3e0; --line-soft:#ececea;
   --teal:#1f6f63; --rust:#9c3f22; --brass:#a8641c;
   --teal-bg:#deefe9; --rust-bg:#f6ded0; --brass-bg:#f5e6cc;
@@ -188,6 +188,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 .stat{display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:100px;}
 .stat.ok{color:var(--teal); background:var(--teal-bg);}
 .stat.brass{color:var(--brass); background:var(--brass-bg);}
+.stat.branch{color:var(--ink-faint); background:var(--surface-2); border:1px solid var(--line); font-weight:500;}
 .stat .dot{width:6px; height:6px; border-radius:50%; background:currentColor;}
 .sc-hero .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
 .sc-logline{margin-top:30px; padding-top:20px; border-top:1px solid var(--line-soft); font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint);}
@@ -271,13 +272,14 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 <header class="sc-hero">
   <div class="wrap">
     <a class="back-link" href="/#continue" data-goatcounter-click="showcase-back-to-options">← Back to my options</a>
-    <div class="eyebrow">A showcase — dogfooding feature/guided-validation-workflow</div>
+    <div class="eyebrow">End-to-end showcase</div>
     <h1>One idea, run through the real gate, start to finish.</h1>
     <p class="dek">Not a demo written to look good. ShipLog is the literal output of one real pass through Keel and Spec Kit — a hypothesis, four interviews, a gate that actually blocked and then passed, a shipped app verified against live GitHub data, and an audit that scored the drift. Here's the whole trail.</p>
     <div class="stat-row">
       <span class="stat ok"><span class="dot"></span>keel-gate: brief OK</span>
       <span class="stat ok"><span class="dot"></span>keel.audit: 0 critical findings</span>
       <span class="stat brass"><span class="dot"></span>6/6 assumptions traced into shipped code</span>
+      <span class="stat branch">branch: feature/guided-validation-workflow</span>
     </div>
     <div class="cta-row">
       <a class="btn primary" href="#story" data-goatcounter-click="showcase-read-story">Read the story ↓</a>
@@ -294,7 +296,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     <span class="step-label">The problem statement</span>
     <h3>A solo founder's Friday chore</h3>
     <div class="guide-chip"><span class="cmd">/speckit.keel.guide "ShipLog: a founder enters..."</span><span class="detected">detected: no <code>keel/</code> yet → captured the hypothesis, derived assumptions, wrote the interview guide and <code>evidence-plan.md</code></span></div>
-    <p class="agent-example-note">Example invocation shown using: Spec Kit's dotted command form, as registered in the extension manifest. Every guide-chip on this page uses the same form for consistency with this run's own history — it isn't a claim that this is universal. Your coding agent may register Keel differently (dashes, a <code>$</code> prefix, or a named skill); see <a href="/#install">Install</a> to pick yours.</p>
+    <p class="agent-example-note">Example shown using Spec Kit's dotted command format. Other agents may use dashes, $, or a named skill. <a href="/#install">See invocation formats</a>.</p>
     <div class="beat-body">
       <p><strong>The idea:</strong> ShipLog — a founder enters their public GitHub username and gets a draft weekly "build in public" update, generated from real commits, merged PRs, and releases over the last 7 days. They review and edit it before anything goes anywhere. It never posts on their behalf.</p>
       <p><strong>The belief:</strong> solo founders who build in public lose real time every week doing the same manual chore — reconstructing what they actually shipped from their own commit history, then writing it up. The reconstruction step, not the writing, is what a tool could remove — as long as the founder still controls what comes out the other end.</p>
