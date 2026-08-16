@@ -273,7 +273,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 
 <header class="sc-hero">
   <div class="wrap">
-    <a class="back-link" href="/#continue" data-goatcounter-click="showcase-back-to-options">← Back to my options</a>
+    <a class="back-link" href="/#continue" data-goatcounter-click="showcase-exit-back">← Back to my options</a>
     <div class="eyebrow">End-to-end showcase</div>
     <h1>One idea, run through the real gate, start to finish.</h1>
     <p class="dek">Not a demo written to look good. ShipLog is the literal output of one real pass through Keel and Spec Kit — a hypothesis, four disclosed synthetic interview records, a gate that actually blocked and then passed, a shipped app verified against live GitHub data, and an audit that scored the drift. Here's the whole trail.</p>
@@ -285,7 +285,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     </div>
     <div class="cta-row">
       <a class="btn primary" href="#story" data-goatcounter-click="showcase-read-story">Read the story ↓</a>
-      <a class="btn ghost" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-browse-source">Browse the source →</a>
+      <a class="btn ghost" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-exit-repository">Browse the source →</a>
     </div>
   </div>
 </header>
@@ -466,15 +466,15 @@ cd shiplog/app && python3 -m http.server 8000</pre>
         <button class="copybtn" data-target="c1">copy</button>
       </div>
       <div class="cta-row">
-        <a class="btn primary" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-cta-repo">View the repo →</a>
+        <a class="btn primary" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-exit-repository">View the repo →</a>
       </div>
     </div>
 
     <div class="cta-final" style="margin-top:20px;">
       <h3>Ready to use Keel on your idea?</h3>
       <div class="cta-row">
-        <a class="btn primary" href="/?setup=1#install" data-goatcounter-click="showcase-setup-myself">Set up Keel myself</a>
-        <a class="btn ghost" id="showcase-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">I need some guidance</a>
+        <a class="btn primary" href="/?setup=1#install" data-goatcounter-click="showcase-exit-setup">Set up Keel myself</a>
+        <a class="btn ghost" id="showcase-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="help-click-showcase">I need some guidance</a>
       </div>
     </div>
   </div>
@@ -551,10 +551,29 @@ cd shiplog/app && python3 -m http.server 8000</pre>
   // index.html's FOUNDER_HELP_SURVEY_URL constant (separate document, can't
   // share the JS variable, but the same "one place, not scattered" rule
   // applies here). "Keel Founder Help Discovery" SurveyMonkey Web Link
-  // collector.
+  // collector. The ?source=showcase param is inert unless a matching
+  // SurveyMonkey Custom Variable is configured on the collector (not
+  // doable without account access) — see index.html for the same note.
   var FOUNDER_HELP_SURVEY_URL = "https://www.surveymonkey.com/r/9PDSD25";
   var surveyLink = document.getElementById('showcase-survey-link');
-  if(surveyLink) surveyLink.href = FOUNDER_HELP_SURVEY_URL;
+  if(surveyLink) surveyLink.href = FOUNDER_HELP_SURVEY_URL + '?source=showcase';
+})();
+
+(function(){
+  // Entry-source view tracking: fires once, based on which link on the
+  // homepage the visitor actually clicked (?src=hero|founder|nav on the
+  // URL — set by index.html's outbound showcase links). A direct visit
+  // or an untagged link (bookmarked, typed, shared) falls back to
+  // "navigation" rather than firing nothing.
+  var src = new URLSearchParams(location.search).get('src');
+  var eventName = src === 'hero' ? 'showcase-view-hero'
+    : src === 'founder' ? 'showcase-view-founder-example'
+    : 'showcase-view-navigation';
+  window.addEventListener('load', function(){
+    if(window.goatcounter && window.goatcounter.count){
+      window.goatcounter.count({path: eventName, title: eventName, event: true});
+    }
+  });
 })();
 
 document.querySelectorAll('.copybtn').forEach(function(btn){

@@ -328,7 +328,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       <a href="#newfounder" data-goatcounter-click="nav-newfounder">New here?</a>
       <a href="#why" data-goatcounter-click="nav-why">Why alongside Spec Kit</a>
       <a href="#install" data-goatcounter-click="nav-install">Install</a>
-      <a href="/showcase/" data-goatcounter-click="nav-showcase">Showcase</a>
+      <a href="/showcase/?src=nav" data-goatcounter-click="nav-showcase">Showcase</a>
     </div>
     <div class="navright">
       <span class="navtag">v0.2.0</span>
@@ -352,8 +352,8 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       — and later checks that what shipped still matches what users told
       you.</p>
       <div class="cta-row">
-        <a class="btn primary" href="#newfounder" data-goatcounter-click="hero-newfounder">I have an idea — guide me</a>
-        <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">I use Spec Kit — install Keel</a>
+        <a class="btn primary" href="#newfounder" data-goatcounter-click="hero-founder-click">I have an idea — guide me</a>
+        <a class="btn ghost" href="#install" data-goatcounter-click="hero-speckit-click">I use Spec Kit — install Keel</a>
       </div>
       <div class="hero-footnotes">
         <p class="hero-strip">Open source · Spec Kit extension · Apache-2.0</p>
@@ -361,7 +361,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
           <svg class="trust-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5 3.5 5v4.5c0 4.2 2.8 7.4 6.5 8.5 3.7-1.1 6.5-4.3 6.5-8.5V5L10 2.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 10l2.2 2.2L13.3 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Keel won't produce a build brief until your evidence clears the bar.
         </p>
-        <a class="hero-showcase-link" href="/showcase/" data-goatcounter-click="hero-showcase-link">View the end-to-end showcase&nbsp;→</a>
+        <a class="hero-showcase-link" href="/showcase/?src=hero" data-goatcounter-click="hero-showcase-link">View the end-to-end showcase&nbsp;→</a>
       </div>
     </div>
     <aside class="hero-card">
@@ -428,13 +428,13 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
           <span class="tag">Option 1</span>
           <h3>Set up Keel myself</h3>
           <p>Install Keel once. After setup, Keel Guide is the only action you need to remember. It will determine your current stage and guide your next step.</p>
-          <button class="btn primary" type="button" id="setup-myself-btn" data-goatcounter-click="newfounder-setup-myself">Set it up myself</button>
+          <button class="btn primary" type="button" id="setup-myself-btn" data-goatcounter-click="founder-self-setup-click">Set it up myself</button>
         </div>
         <div class="persona-card">
           <span class="tag">Option 2</span>
           <h3>Tell us where you're stuck</h3>
           <p>We're learning where founders need additional guidance. Tell us what you're trying to accomplish and where you are getting stuck. This is not a sales form, and there is no commitment.</p>
-          <a class="btn ghost" id="founder-help-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">Tell us where you're stuck</a>
+          <a class="btn ghost" id="founder-help-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="help-click-options">Tell us where you're stuck</a>
         </div>
       </div>
     </div>
@@ -447,7 +447,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     <h2 style="font-size:clamp(24px,2.8vw,30px); max-width:34ch; margin:0 auto;">See a real run, start to finish</h2>
     <p class="measure" style="color:var(--ink-soft); font-size:16px; margin:14px auto 0;">A real execution of Keel and Spec Kit using a disclosed synthetic interview dataset. The gate, build, live verification and audit are real.</p>
     <div class="cta-row" style="justify-content:center; margin-top:24px;">
-      <a class="btn primary" href="/showcase/" data-goatcounter-click="tryit-teaser-showcase">Read the showcase →</a>
+      <a class="btn primary" href="/showcase/?src=founder" data-goatcounter-click="tryit-teaser-showcase">Read the showcase →</a>
     </div>
   </div>
 </section>
@@ -547,7 +547,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
         <div>
           <div class="step">
             <span class="stepnum">1</span><h4>Install the extension</h4>
-            <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/tags/v0.2.0.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-install-cmd">copy</button></div>
+            <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/tags/v0.2.0.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-keel-install-existing">copy</button></div>
             <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Keel is listed in Spec Kit's community catalog, but the entry is still syncing to v0.2.0 — until that update lands, the bare <code>specify extension add keel</code> will resolve the older v0.1.1. The command above installs the pinned v0.2.0 release directly, so you don't need to wait. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
           </div>
           <div class="step">
@@ -573,18 +573,18 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
         <div>
           <div class="step">
             <span class="stepnum">1</span><h4>Install the Specify CLI</h4>
-            <div class="codeblock"><pre id="c5">uv tool install specify-cli</pre><button class="copybtn" data-target="c5" data-goatcounter-click="copy-uv-install-cmd">copy</button></div>
+            <div class="codeblock"><pre id="c5">uv tool install specify-cli</pre><button class="copybtn" data-target="c5" data-goatcounter-click="copy-uv-install">copy</button></div>
             <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Installs from PyPI. Prefer pinning a release? Spec Kit's own README has the <code>git+https://...@vX.Y.Z</code> form.</p>
           </div>
           <div class="step">
             <span class="stepnum">2</span><h4>Initialize a Spec Kit project</h4>
             <div class="codeblock"><pre id="c6">specify init my-project --integration claude
-cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-click="copy-specify-init-cmd">copy</button></div>
+cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-click="copy-specify-init">copy</button></div>
             <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Swap <code>claude</code> for whichever agent you use — <code>copilot</code>, <code>gemini</code>, and others are also supported.</p>
           </div>
           <div class="step">
             <span class="stepnum">3</span><h4>Install the Keel extension</h4>
-            <div class="codeblock"><pre id="c7">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/tags/v0.2.0.zip</pre><button class="copybtn" data-target="c7" data-goatcounter-click="copy-install-cmd-new">copy</button></div>
+            <div class="codeblock"><pre id="c7">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/tags/v0.2.0.zip</pre><button class="copybtn" data-target="c7" data-goatcounter-click="copy-keel-install-new">copy</button></div>
             <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Keel is listed in Spec Kit's community catalog, but the entry is still syncing to v0.2.0 — until that update lands, the bare <code>specify extension add keel</code> will resolve the older v0.1.1. The command above installs the pinned v0.2.0 release directly, so you don't need to wait.</p>
           </div>
           <div class="step">
@@ -597,7 +597,7 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
           </div>
         </div>
       </div>
-      <p class="beginner-help">Setup looks unfamiliar? <a href="#" id="beginner-help-survey-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">Tell us where you're stuck.</a></p>
+      <p class="beginner-help">Setup looks unfamiliar? <a href="#" id="beginner-help-survey-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="help-click-install">Tell us where you're stuck.</a></p>
     </div>
 
     <details class="phases-disclosure" style="margin-top:40px; border-top:1px solid var(--line-soft); padding-top:24px;">
@@ -660,7 +660,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
       </div>
       <div class="footer-col">
         <span class="footer-h">Project</span>
-        <a href="/showcase/" data-goatcounter-click="footer-showcase">Showcase — see it run</a>
+        <a href="/showcase/?src=nav" data-goatcounter-click="footer-showcase">Showcase — see it run</a>
         <a href="https://github.com/keeldiscovery/spec-kit-keel" data-goatcounter-click="footer-github">Source on GitHub</a>
         <a href="https://github.com/keeldiscovery/spec-kit-keel/blob/main/README.md" data-goatcounter-click="footer-readme">README</a>
         <a href="https://github.com/keeldiscovery/spec-kit-keel/issues" data-goatcounter-click="footer-issues">Report an issue</a>
@@ -721,6 +721,40 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 })();
 
 (function(){
+  // Section-view tracking: GoatCounter's own script only sees clicks, so
+  // a visitor who reads the page by scrolling and never clicks anything
+  // is otherwise invisible in the funnel. Each of these fires once, the
+  // first time its section is at least 40% in view, then stops observing
+  // — not a repeated "still visible" signal.
+  function trackSectionView(el, eventName){
+    if(!el || typeof IntersectionObserver !== 'function') return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        io.unobserve(el);
+        if(window.goatcounter && window.goatcounter.count){
+          window.goatcounter.count({path: eventName, title: eventName, event: true});
+        }
+      });
+    }, {threshold: 0.4});
+    io.observe(el);
+  }
+  trackSectionView(document.getElementById('newfounder'), 'founder-workflow-view');
+  trackSectionView(document.getElementById('continue'), 'founder-options-view');
+  trackSectionView(document.querySelector('.install-panel[data-panel="have"]'), 'install-existing-view');
+  trackSectionView(document.querySelector('.install-panel[data-panel="new"]'), 'install-new-view');
+
+  // home-view: fired on window 'load' rather than immediately, giving the
+  // async GoatCounter script (loaded in <head>, may not have finished by
+  // the time this inline script runs) more time to actually be ready.
+  window.addEventListener('load', function(){
+    if(window.goatcounter && window.goatcounter.count){
+      window.goatcounter.count({path:'home-view', title:'Home page view', event:true});
+    }
+  });
+})();
+
+(function(){
   // copy buttons — event delegation, not per-button binding, so buttons
   // rendered dynamically later (agent-specific commands) work too without
   // needing a re-bind step after every render
@@ -767,9 +801,21 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
   // SurveyMonkey Web Link collector.
   var FOUNDER_HELP_SURVEY_URL = "https://www.surveymonkey.com/r/9PDSD25";
 
-  ['founder-help-survey-link', 'beginner-help-survey-link'].forEach(function(id){
+  // A ?source=... param on the URL, distinct per link. On its own this
+  // does nothing — click tracking (help-click-options/-install/-showcase)
+  // already tells us which link got clicked. It only becomes useful for
+  // tying a *completed* survey response back to its entry point if a
+  // SurveyMonkey Custom Variable named "source" is configured on this
+  // collector to capture it (Collector settings, not something doable
+  // from here — no SurveyMonkey account access). Without that
+  // configuration this param is inert and harmless.
+  var SURVEY_LINK_SOURCES = {
+    'founder-help-survey-link': 'options',
+    'beginner-help-survey-link': 'install'
+  };
+  Object.keys(SURVEY_LINK_SOURCES).forEach(function(id){
     var link = document.getElementById(id);
-    if(link) link.href = FOUNDER_HELP_SURVEY_URL;
+    if(link) link.href = FOUNDER_HELP_SURVEY_URL + '?source=' + SURVEY_LINK_SOURCES[id];
   });
 
   function selectBeginnerInstallTab(){
@@ -823,16 +869,16 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
   var STORAGE_KEY = 'keel-agent-integration';
   var SAME_WORKFLOW_NOTE = '<p class="agent-note">Same Keel workflow; only the invocation format changes.</p>';
 
-  function startKeelHTML(preId, key){
+  function startKeelHTML(preId, path, key){
     if(key === 'claude' || key === 'codex'){
       var a = KEEL_AGENTS[key];
-      return '<div class="codeblock"><pre id="'+preId+'">'+a.guide+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-start-keel">copy</button></div>'
+      return '<div class="codeblock"><pre id="'+preId+'">'+a.guide+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-start-keel-'+path+'-'+key+'">copy</button></div>'
         + '<p class="step-note">This is the only thing most users need to run. Keel reads the current project state, determines the next step, and guides you through it.</p>'
         + SAME_WORKFLOW_NOTE;
     }
     if(key === 'copilot'){
       return '<p class="step-note">Ask Copilot to use the speckit-keel-guide skill. Depending on your Copilot setup, it may appear through the skills or agents interface instead of as a slash command.</p>'
-        + '<div class="codeblock"><pre id="'+preId+'">'+KEEL_AGENTS.copilot.skillPrompt+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-start-keel">copy</button></div>'
+        + '<div class="codeblock"><pre id="'+preId+'">'+KEEL_AGENTS.copilot.skillPrompt+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-start-keel-'+path+'-copilot">copy</button></div>'
         + SAME_WORKFLOW_NOTE;
     }
     if(key === 'other'){
@@ -848,11 +894,11 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
     return '<p class="step-note">Choose your coding agent above to see how to start Keel.</p>';
   }
 
-  function advancedHTML(preId, key){
+  function advancedHTML(preId, path, key){
     var agentKey = (key === 'claude' || key === 'codex' || key === 'copilot') ? key : 'other';
     var commands = KEEL_AGENTS[agentKey].commands;
     var note = agentKey === 'copilot' ? '<p class="agent-note" style="margin:0 0 8px;">Skill names — not slash commands.</p>' : '';
-    return note + '<div class="codeblock"><pre id="'+preId+'">'+commands.join('\n')+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-advanced-commands">copy</button></div>';
+    return note + '<div class="codeblock"><pre id="'+preId+'">'+commands.join('\n')+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-advanced-'+path+'-'+agentKey+'">copy</button></div>';
   }
 
   function applyAgent(key, persist){
@@ -860,10 +906,10 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
     var startNew = document.getElementById('start-keel-new');
     var advHave = document.getElementById('advanced-commands-have');
     var advNew = document.getElementById('advanced-commands-new');
-    if(startHave) startHave.innerHTML = startKeelHTML('c3', key);
-    if(startNew) startNew.innerHTML = startKeelHTML('c9', key);
-    if(advHave) advHave.innerHTML = advancedHTML('c10', key);
-    if(advNew) advNew.innerHTML = advancedHTML('c11', key);
+    if(startHave) startHave.innerHTML = startKeelHTML('c3', 'existing', key);
+    if(startNew) startNew.innerHTML = startKeelHTML('c9', 'new', key);
+    if(advHave) advHave.innerHTML = advancedHTML('c10', 'existing', key);
+    if(advNew) advNew.innerHTML = advancedHTML('c11', 'new', key);
 
     document.querySelectorAll('.agent-btn').forEach(function(btn){
       btn.setAttribute('aria-pressed', btn.getAttribute('data-agent') === key ? 'true' : 'false');
