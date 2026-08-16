@@ -50,9 +50,15 @@
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+/* No CSS scroll-behavior:smooth — its animation duration scales with
+   distance and isn't capped, which is exactly what made deep-link and
+   long same-page jumps take 2-3s. Same-page anchor clicks get a
+   JS-driven, fixed-duration smooth scroll instead (see bottom of body);
+   anything not intercepted (initial page load with a #hash in the URL,
+   i.e. a genuine deep link) falls back to the browser's default instant
+   jump, which is what we want there. */
 #newfounder, #continue, #why, #how, #install{scroll-margin-top:88px;}
-@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
 body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
 a{color:var(--brass);}
 code,.mono{font-family:var(--font-mono);}
@@ -111,6 +117,7 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 .btn.ghost:hover{border-color:var(--brass); color:var(--brass);}
 
 .hero-card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:24px 26px; box-shadow:var(--shadow);}
+.hero-card-tag{display:block; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; margin-bottom:10px;}
 .hero-card-title{
   display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:13px; font-weight:700;
   color:var(--brass); letter-spacing:0.02em; margin:0 0 18px; padding-bottom:14px; border-bottom:1px solid var(--line-soft);
@@ -263,6 +270,8 @@ section:last-of-type{border-bottom:none;}
 .agent-btn:hover{border-color:var(--brass); color:var(--brass);}
 .agent-btn[aria-pressed="true"]{background:var(--ink); color:var(--surface); border-color:var(--ink);}
 .step-note{margin-top:8px; font-size:13.5px; color:var(--ink-faint);}
+.beginner-help{margin:24px 0 0; padding-top:18px; border-top:1px solid var(--line-soft); font-size:13.5px; color:var(--ink-faint);}
+.beginner-help a{color:var(--brass); font-weight:600;}
 .agent-rules{margin:8px 0 0; padding-left:20px; font-size:13.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:5px;}
 .agent-note{font-size:12.5px; color:var(--ink-faint); margin:8px 0 0;}
 .install-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:36px; align-items:start;}
@@ -356,6 +365,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       </div>
     </div>
     <aside class="hero-card">
+      <span class="hero-card-tag">Example Keel Guide output</span>
       <div class="hero-card-title"><span class="hero-card-mark" aria-hidden="true"></span>Keel Guide</div>
       <dl class="hero-card-body">
         <div class="hero-card-item">
@@ -587,6 +597,7 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
           </div>
         </div>
       </div>
+      <p class="beginner-help">Setup looks unfamiliar? <a href="#" id="beginner-help-survey-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">Tell us where you're stuck.</a></p>
     </div>
 
     <details class="phases-disclosure" style="margin-top:40px; border-top:1px solid var(--line-soft); padding-top:24px;">
@@ -645,7 +656,7 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
           <svg viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
           Keel
         </a>
-        <p>Evidence-backed discovery upstream of <code>/speckit.specify</code>, and a check afterward that the build still matches what you learned.</p>
+        <p>Evidence-backed discovery before Spec Kit's Specify step, and a check afterward that the build still matches what you learned.</p>
       </div>
       <div class="footer-col">
         <span class="footer-h">Project</span>
@@ -668,6 +679,47 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 </footer>
 
 <script>
+(function(){
+  // Fixed-duration smooth scroll (native scroll-behavior:smooth's
+  // animation duration scales with distance and isn't capped — that's
+  // what made deep-link and long same-page jumps take 2-3s). Used for
+  // same-page anchor clicks only; a deep link that lands here with a
+  // #hash already in the URL is never a click, so it's never intercepted
+  // below and just gets the browser's default instant jump on load,
+  // which is what we want there.
+  var REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function smoothScrollTo(target, duration){
+    if(!target) return;
+    duration = duration || 450;
+    var startY = window.pageYOffset;
+    var marginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+    var targetY = target.getBoundingClientRect().top + startY - marginTop;
+    if(REDUCED_MOTION){ window.scrollTo(0, targetY); return; }
+    var startTime = null;
+    function step(ts){
+      if(startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, startY + (targetY - startY) * eased);
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  window.keelSmoothScrollTo = smoothScrollTo;
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if(!id) return;
+    var target = document.getElementById(id);
+    if(!target) return;
+    e.preventDefault();
+    smoothScrollTo(target, 450);
+    if(history.pushState) history.pushState(null, '', '#'+id);
+  });
+})();
+
 (function(){
   // copy buttons — event delegation, not per-button binding, so buttons
   // rendered dynamically later (agent-specific commands) work too without
@@ -715,8 +767,10 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
   // SurveyMonkey Web Link collector.
   var FOUNDER_HELP_SURVEY_URL = "https://www.surveymonkey.com/r/9PDSD25";
 
-  var surveyLink = document.getElementById('founder-help-survey-link');
-  if(surveyLink) surveyLink.href = FOUNDER_HELP_SURVEY_URL;
+  ['founder-help-survey-link', 'beginner-help-survey-link'].forEach(function(id){
+    var link = document.getElementById(id);
+    if(link) link.href = FOUNDER_HELP_SURVEY_URL;
+  });
 
   function selectBeginnerInstallTab(){
     var newTabBtn = document.querySelector('.install-toggle .toggle-btn[data-panel="new"]');
@@ -728,7 +782,8 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
     setupBtn.addEventListener('click', function(){
       selectBeginnerInstallTab();
       var installSection = document.getElementById('install');
-      if(installSection) installSection.scrollIntoView({behavior:'smooth', block:'start'});
+      if(window.keelSmoothScrollTo) window.keelSmoothScrollTo(installSection, 450);
+      else if(installSection) installSection.scrollIntoView({behavior:'smooth', block:'start'});
     });
   }
 

@@ -50,8 +50,10 @@
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+/* No CSS scroll-behavior:smooth — see index.html for why (uncapped
+   animation duration on native smooth scroll). Same-page anchor clicks
+   (e.g. "Read the story") get a fixed-duration JS scroll instead. */
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
 body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
 a{color:var(--brass);}
 code,.mono{font-family:var(--font-mono);}
@@ -274,7 +276,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     <a class="back-link" href="/#continue" data-goatcounter-click="showcase-back-to-options">← Back to my options</a>
     <div class="eyebrow">End-to-end showcase</div>
     <h1>One idea, run through the real gate, start to finish.</h1>
-    <p class="dek">Not a demo written to look good. ShipLog is the literal output of one real pass through Keel and Spec Kit — a hypothesis, four interviews, a gate that actually blocked and then passed, a shipped app verified against live GitHub data, and an audit that scored the drift. Here's the whole trail.</p>
+    <p class="dek">Not a demo written to look good. ShipLog is the literal output of one real pass through Keel and Spec Kit — a hypothesis, four disclosed synthetic interview records, a gate that actually blocked and then passed, a shipped app verified against live GitHub data, and an audit that scored the drift. Here's the whole trail.</p>
     <div class="stat-row">
       <span class="stat ok"><span class="dot"></span>keel-gate: brief OK</span>
       <span class="stat ok"><span class="dot"></span>keel.audit: 0 critical findings</span>
@@ -360,7 +362,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 
   <div class="beat" id="gate">
     <span class="step-label">The gate</span>
-    <h3>Not simulated — the actual script, against the actual evidence</h3>
+    <h3>The actual gate, run against the disclosed test evidence</h3>
     <div class="guide-chip"><span class="cmd">/speckit.keel.guide</span><span class="detected">detected: evidence at threshold → ran <code>check</code> inline, five-option decision menu, recommended proceed</span></div>
     <div class="beat-body">
       <div class="tbl-scroll">
@@ -487,7 +489,7 @@ cd shiplog/app && python3 -m http.server 8000</pre>
           <svg viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
           Keel
         </a>
-        <p>Evidence-backed discovery upstream of <code>/speckit-specify</code>, and a check afterward that the build still matches what you learned.</p>
+        <p>Evidence-backed discovery before Spec Kit's Specify step, and a check afterward that the build still matches what you learned.</p>
       </div>
       <div class="footer-col">
         <span class="footer-h">Project</span>
@@ -509,6 +511,41 @@ cd shiplog/app && python3 -m http.server 8000</pre>
 </footer>
 
 <script>
+(function(){
+  // Fixed-duration smooth scroll for same-page anchor clicks — see
+  // index.html for the full rationale (native scroll-behavior:smooth's
+  // duration isn't capped).
+  var REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function smoothScrollTo(target, duration){
+    if(!target) return;
+    duration = duration || 450;
+    var startY = window.pageYOffset;
+    var marginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+    var targetY = target.getBoundingClientRect().top + startY - marginTop;
+    if(REDUCED_MOTION){ window.scrollTo(0, targetY); return; }
+    var startTime = null;
+    function step(ts){
+      if(startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, startY + (targetY - startY) * eased);
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if(!id) return;
+    var target = document.getElementById(id);
+    if(!target) return;
+    e.preventDefault();
+    smoothScrollTo(target, 450);
+    if(history.pushState) history.pushState(null, '', '#'+id);
+  });
+})();
+
 (function(){
   // Single source of truth for this page's founder-help-survey link — mirrors
   // index.html's FOUNDER_HELP_SURVEY_URL constant (separate document, can't
