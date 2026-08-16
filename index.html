@@ -219,7 +219,8 @@ section:last-of-type{border-bottom:none;}
 .toggle-btn:not(.active):hover{color:var(--ink);}
 .install-panel[hidden]{display:none;}
 .agent-select{margin:0 0 32px; padding:20px 22px; background:var(--surface-2); border:1px solid var(--line); border-radius:12px;}
-.agent-select-prompt{font-size:14px; font-weight:600; color:var(--ink); margin:0 0 12px;}
+.agent-select-heading{font-size:15.5px; font-weight:700; color:var(--ink); margin:0 0 6px;}
+.agent-select-prompt{font-size:13.5px; color:var(--ink-soft); margin:0 0 12px;}
 .agent-toggle{display:flex; flex-wrap:wrap; gap:8px;}
 .agent-btn{
   padding:8px 14px; border-radius:100px; border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
@@ -456,6 +457,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     </div>
 
     <div class="agent-select">
+      <h4 class="agent-select-heading">Which coding agent are you using?</h4>
       <p class="agent-select-prompt" id="agent-select-prompt">Choose your coding agent to see the correct way to run Keel.</p>
       <div class="agent-toggle" role="group" aria-label="Choose your coding agent">
         <button class="agent-btn" type="button" data-agent="claude" aria-pressed="false" data-goatcounter-click="agent-select-claude">Claude Code</button>
