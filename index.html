@@ -435,6 +435,22 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     <div class="cta-row" style="margin-top:32px;">
       <a class="btn primary" href="/showcase/" data-goatcounter-click="newfounder-worked-example">See it run, start to finish →</a>
     </div>
+
+    <h3 style="font-size:16px; margin:40px 0 4px;">How would you like to continue?</h3>
+    <div class="persona-grid" style="max-width:none; margin:16px 0 0;">
+      <div class="persona-card">
+        <span class="tag">Option 1</span>
+        <h3>Try it myself</h3>
+        <p>Install Keel once. After setup, <code>/speckit.keel.guide</code> is the only command you need to remember. It will determine your current stage and guide your next step.</p>
+        <button class="btn primary" type="button" id="setup-myself-btn" data-goatcounter-click="newfounder-setup-myself">Set it up myself</button>
+      </div>
+      <div class="persona-card">
+        <span class="tag">Option 2</span>
+        <h3>Tell us where you're stuck</h3>
+        <p>We're learning where founders need additional guidance. Tell us what you're trying to accomplish and where you are getting stuck. This is not a sales form, and there is no commitment.</p>
+        <a class="btn ghost" id="founder-help-survey-link" href="#" target="_blank" rel="noopener noreferrer" data-goatcounter-click="founder_help_survey_click">Tell us where you're stuck</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -698,6 +714,26 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
       });
     });
   });
+})();
+
+(function(){
+  // Single source of truth for the founder-help-survey link — do not hardcode
+  // this URL anywhere else on the page. Replace with the real published
+  // SurveyMonkey Web Link collector URL once the survey is live.
+  var FOUNDER_HELP_SURVEY_URL = "https://www.surveymonkey.com/r/REPLACE_WITH_KEEL_FOUNDER_HELP_SLUG";
+
+  var surveyLink = document.getElementById('founder-help-survey-link');
+  if(surveyLink) surveyLink.href = FOUNDER_HELP_SURVEY_URL;
+
+  var setupBtn = document.getElementById('setup-myself-btn');
+  if(setupBtn){
+    setupBtn.addEventListener('click', function(){
+      var newTabBtn = document.querySelector('.install-toggle .toggle-btn[data-panel="new"]');
+      if(newTabBtn) newTabBtn.click();
+      var installSection = document.getElementById('install');
+      if(installSection) installSection.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  }
 })();
 </script>
 </body>
