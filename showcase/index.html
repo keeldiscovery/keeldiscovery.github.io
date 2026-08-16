@@ -209,6 +209,8 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
 }
 .guide-chip .cmd{font-family:var(--font-mono); font-size:12.5px; font-weight:700; color:var(--brass); white-space:nowrap;}
 .guide-chip .detected{font-size:13px; color:var(--ink-soft);}
+.agent-example-note{font-size:12px; color:var(--ink-faint); margin-top:8px; max-width:64ch;}
+.agent-example-note a{color:var(--ink-faint); text-decoration:underline;}
 .beat .beat-body p strong{color:var(--ink);}
 
 .disclosure{display:flex; gap:12px; align-items:flex-start; background:var(--brass-bg); border:1px solid var(--brass); border-radius:10px; padding:15px 17px; font-size:13.6px; color:var(--ink);}
@@ -292,6 +294,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     <span class="step-label">The problem statement</span>
     <h3>A solo founder's Friday chore</h3>
     <div class="guide-chip"><span class="cmd">/speckit.keel.guide "ShipLog: a founder enters..."</span><span class="detected">detected: no <code>keel/</code> yet → captured the hypothesis, derived assumptions, wrote the interview guide and <code>evidence-plan.md</code></span></div>
+    <p class="agent-example-note">Example invocation shown using: Spec Kit's dotted command form, as registered in the extension manifest. Every guide-chip on this page uses the same form for consistency with this run's own history — it isn't a claim that this is universal. Your coding agent may register Keel differently (dashes, a <code>$</code> prefix, or a named skill); see <a href="/#install">Install</a> to pick yours.</p>
     <div class="beat-body">
       <p><strong>The idea:</strong> ShipLog — a founder enters their public GitHub username and gets a draft weekly "build in public" update, generated from real commits, merged PRs, and releases over the last 7 days. They review and edit it before anything goes anywhere. It never posts on their behalf.</p>
       <p><strong>The belief:</strong> solo founders who build in public lose real time every week doing the same manual chore — reconstructing what they actually shipped from their own commit history, then writing it up. The reconstruction step, not the writing, is what a tool could remove — as long as the founder still controls what comes out the other end.</p>

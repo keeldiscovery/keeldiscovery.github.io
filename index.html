@@ -108,6 +108,7 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 .mini-flow-label{font-family:var(--font-mono); font-size:11px; letter-spacing:0.03em; text-transform:uppercase; color:var(--brass); font-weight:700;}
 .mini-flow-value{font-size:13.5px; color:var(--ink); font-family:var(--font-mono); font-weight:600;}
 .mini-flow-arrow{color:var(--ink-faint); font-size:16px; flex-shrink:0;}
+.mini-flow-note{font-size:12.5px; color:var(--ink-faint); margin:14px 0 0;}
 @media (max-width:560px){
   .mini-flow{flex-direction:column; align-items:stretch;}
   .mini-flow-arrow{transform:rotate(90deg); text-align:center;}
@@ -217,6 +218,18 @@ section:last-of-type{border-bottom:none;}
 .toggle-btn.active{background:var(--ink); color:var(--surface);}
 .toggle-btn:not(.active):hover{color:var(--ink);}
 .install-panel[hidden]{display:none;}
+.agent-select{margin:0 0 32px; padding:20px 22px; background:var(--surface-2); border:1px solid var(--line); border-radius:12px;}
+.agent-select-prompt{font-size:14px; font-weight:600; color:var(--ink); margin:0 0 12px;}
+.agent-toggle{display:flex; flex-wrap:wrap; gap:8px;}
+.agent-btn{
+  padding:8px 14px; border-radius:100px; border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
+  font-family:var(--font-body); font-size:13px; font-weight:600;
+}
+.agent-btn:hover{border-color:var(--brass); color:var(--brass);}
+.agent-btn[aria-pressed="true"]{background:var(--ink); color:var(--surface); border-color:var(--ink);}
+.step-note{margin-top:8px; font-size:13.5px; color:var(--ink-faint);}
+.agent-rules{margin:8px 0 0; padding-left:20px; font-size:13.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:5px;}
+.agent-note{font-size:12.5px; color:var(--ink-faint); margin:8px 0 0;}
 .install-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:36px; align-items:start;}
 .install-grid > *{min-width:0;}
 .reqs{display:flex; flex-direction:column; gap:10px;}
@@ -287,11 +300,12 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
   <div class="wrap">
     <div class="eyebrow">Validate before you build</div>
     <h1>Prove it, then build it.</h1>
-    <p class="dek">Have an idea? Once Keel is installed, there's one command
-    to remember. Keel guides you through who to interview, what to ask,
-    and whether to pivot, narrow, or proceed. When the evidence is strong
-    enough, it creates a validated brief for Spec Kit — and later checks
-    that what shipped still matches what users told you.</p>
+    <p class="dek">Have an idea? Once Keel is installed, there's one action
+    to remember: run Keel Guide. Keel guides you through who to interview,
+    what to ask, and whether to pivot, narrow, or proceed. When the
+    evidence is strong enough, it creates a validated brief for Spec Kit
+    — and later checks that what shipped still matches what users told
+    you.</p>
     <div class="cta-row">
       <a class="btn primary" href="#newfounder" data-goatcounter-click="hero-newfounder">I have an idea — guide me</a>
       <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">I use Spec Kit — install Keel</a>
@@ -321,8 +335,11 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     <div class="guide-lead" style="margin-top:28px;">
       <div class="glyph">→</div>
       <div class="body">
-        <h3>No commands to memorize</h3>
-        <p>Everything above happens through one thing: run <code>/speckit.keel.guide</code> and keep going. It looks at what you've done so far and tells you what to do next — you never have to know which of Keel's five underlying commands to reach for, or in what order.</p>
+        <h3>One action to remember: Keel Guide</h3>
+        <p>Run Keel Guide and keep going. It reads what you have
+        completed, determines the current stage, and guides you through
+        the next step. The exact way you invoke it depends on your coding
+        agent.</p>
       </div>
     </div>
     <h3 style="font-size:16px; margin:34px 0 4px;">What you get out of it</h3>
@@ -340,7 +357,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
         <div class="persona-card">
           <span class="tag">Option 1</span>
           <h3>Set up Keel myself</h3>
-          <p>Install Keel once. After setup, <code>/speckit.keel.guide</code> is the only command you need to remember. It will determine your current stage and guide your next step.</p>
+          <p>Install Keel once. After setup, Keel Guide is the only action you need to remember. It will determine your current stage and guide your next step.</p>
           <button class="btn primary" type="button" id="setup-myself-btn" data-goatcounter-click="newfounder-setup-myself">Set it up myself</button>
         </div>
         <div class="persona-card">
@@ -417,7 +434,7 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       <div class="mini-flow">
         <div class="mini-flow-step">
           <span class="mini-flow-label">Validate</span>
-          <code class="mini-flow-value">/speckit.keel.guide</code>
+          <span class="mini-flow-value">Keel Guide</span>
         </div>
         <div class="mini-flow-arrow" aria-hidden="true">→</div>
         <div class="mini-flow-step">
@@ -427,14 +444,25 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
         <div class="mini-flow-arrow" aria-hidden="true">→</div>
         <div class="mini-flow-step">
           <span class="mini-flow-label">Check what shipped</span>
-          <code class="mini-flow-value">/speckit.keel.guide</code>
+          <span class="mini-flow-value">Keel Guide</span>
         </div>
       </div>
+      <p class="mini-flow-note">The invocation format varies by coding agent; the workflow does not.</p>
     </div>
 
     <div class="install-toggle" role="tablist">
       <button class="toggle-btn active" type="button" data-panel="have" role="tab" aria-selected="true" data-goatcounter-click="install-toggle-have">I already have Spec Kit</button>
       <button class="toggle-btn" type="button" data-panel="new" role="tab" aria-selected="false" data-goatcounter-click="install-toggle-new">I don't have Spec Kit yet</button>
+    </div>
+
+    <div class="agent-select">
+      <p class="agent-select-prompt" id="agent-select-prompt">Choose your coding agent to see the correct way to run Keel.</p>
+      <div class="agent-toggle" role="group" aria-label="Choose your coding agent">
+        <button class="agent-btn" type="button" data-agent="claude" aria-pressed="false" data-goatcounter-click="agent-select-claude">Claude Code</button>
+        <button class="agent-btn" type="button" data-agent="copilot" aria-pressed="false" data-goatcounter-click="agent-select-copilot">GitHub Copilot</button>
+        <button class="agent-btn" type="button" data-agent="codex" aria-pressed="false" data-goatcounter-click="agent-select-codex">Codex CLI</button>
+        <button class="agent-btn" type="button" data-agent="other" aria-pressed="false" data-goatcounter-click="agent-select-other">Another Spec Kit integration</button>
+      </div>
     </div>
 
     <div class="install-panel" data-panel="have">
@@ -453,15 +481,10 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
           </div>
           <div class="step">
             <span class="stepnum">2</span><h4>Start Keel</h4>
-            <div class="codeblock"><pre id="c3">/speckit.keel.guide</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-start-keel">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">This is the only command most users need. Keel reads the current project state, determines the next step, and guides you through it.</p>
+            <div id="start-keel-have"></div>
             <details class="phases-disclosure">
               <summary>Advanced: Show individual Keel commands <span class="chev" aria-hidden="true"></span></summary>
-              <div class="codeblock" style="margin-top:14px;"><pre id="c10">/speckit.keel.init
-/speckit.keel.add-evidence
-/speckit.keel.check
-/speckit.keel.brief
-/speckit.keel.audit</pre><button class="copybtn" data-target="c10" data-goatcounter-click="copy-advanced-commands">copy</button></div>
+              <div id="advanced-commands-have" style="margin-top:14px;"></div>
             </details>
           </div>
         </div>
@@ -495,15 +518,10 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
           </div>
           <div class="step">
             <span class="stepnum">4</span><h4>Start Keel</h4>
-            <div class="codeblock"><pre id="c9">/speckit.keel.guide</pre><button class="copybtn" data-target="c9" data-goatcounter-click="copy-start-keel-new">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">This is the only command most users need. Keel reads the current project state, determines the next step, and guides you through it.</p>
+            <div id="start-keel-new"></div>
             <details class="phases-disclosure">
               <summary>Advanced: Show individual Keel commands <span class="chev" aria-hidden="true"></span></summary>
-              <div class="codeblock" style="margin-top:14px;"><pre id="c11">/speckit.keel.init
-/speckit.keel.add-evidence
-/speckit.keel.check
-/speckit.keel.brief
-/speckit.keel.audit</pre><button class="copybtn" data-target="c11" data-goatcounter-click="copy-advanced-commands-new">copy</button></div>
+              <div id="advanced-commands-new" style="margin-top:14px;"></div>
             </details>
           </div>
         </div>
@@ -590,16 +608,19 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
 
 <script>
 (function(){
-  // copy buttons
-  document.querySelectorAll('.copybtn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var target=document.getElementById(btn.getAttribute('data-target'));
-      var text=target.textContent;
-      function done(){ btn.textContent='copied'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('copied'); },1400); }
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
-      } else { fallbackCopy(text); done(); }
-    });
+  // copy buttons — event delegation, not per-button binding, so buttons
+  // rendered dynamically later (agent-specific commands) work too without
+  // needing a re-bind step after every render
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('.copybtn');
+    if(!btn) return;
+    var target=document.getElementById(btn.getAttribute('data-target'));
+    if(!target) return;
+    var text=target.textContent;
+    function done(){ btn.textContent='copied'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('copied'); },1400); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+    } else { fallbackCopy(text); done(); }
   });
   function fallbackCopy(text){
     var ta=document.createElement('textarea');
@@ -655,6 +676,104 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
   // #install via the hash; this just also selects the beginner tab.
   if(/(?:^|[?&])setup=1(?:&|$)/.test(location.search)){
     selectBeginnerInstallTab();
+  }
+})();
+
+(function(){
+  // Shared config: every page of Install (Start Keel step, Advanced
+  // accordion) reads from this one object rather than hardcoding dotted
+  // and dashed forms independently in multiple places.
+  var KEEL_AGENTS = {
+    claude: {
+      label: 'Claude Code',
+      guide: '/speckit-keel-guide',
+      commands: ['/speckit-keel-init','/speckit-keel-add-evidence','/speckit-keel-check','/speckit-keel-brief','/speckit-keel-audit']
+    },
+    codex: {
+      label: 'Codex CLI',
+      guide: '$speckit-keel-guide',
+      commands: ['$speckit-keel-init','$speckit-keel-add-evidence','$speckit-keel-check','$speckit-keel-brief','$speckit-keel-audit']
+    },
+    copilot: {
+      label: 'GitHub Copilot',
+      skillPrompt: 'Use the speckit-keel-guide skill and guide me through the next step.',
+      commands: ['speckit-keel-init','speckit-keel-add-evidence','speckit-keel-check','speckit-keel-brief','speckit-keel-audit']
+    },
+    other: {
+      label: 'Another Spec Kit integration',
+      commands: ['/speckit.keel.init','/speckit.keel.add-evidence','/speckit.keel.check','/speckit.keel.brief','/speckit.keel.audit']
+    }
+  };
+  var STORAGE_KEY = 'keel-agent-integration';
+  var SAME_WORKFLOW_NOTE = '<p class="agent-note">Same Keel workflow; only the invocation format changes.</p>';
+
+  function startKeelHTML(preId, key){
+    if(key === 'claude' || key === 'codex'){
+      var a = KEEL_AGENTS[key];
+      return '<div class="codeblock"><pre id="'+preId+'">'+a.guide+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-start-keel">copy</button></div>'
+        + '<p class="step-note">This is the only thing most users need to run. Keel reads the current project state, determines the next step, and guides you through it.</p>'
+        + SAME_WORKFLOW_NOTE;
+    }
+    if(key === 'copilot'){
+      return '<p class="step-note">Ask Copilot to use the speckit-keel-guide skill. Depending on your Copilot setup, it may appear through the skills or agents interface instead of as a slash command.</p>'
+        + '<div class="codeblock"><pre id="'+preId+'">'+KEEL_AGENTS.copilot.skillPrompt+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-start-keel">copy</button></div>'
+        + SAME_WORKFLOW_NOTE;
+    }
+    // 'other', or no selection yet — the neutral default
+    return '<p class="step-note">Keel follows the same invocation convention as your existing Spec Kit commands.</p>'
+      + '<ul class="agent-rules">'
+      + '<li>If you use <code>/speckit.specify</code>, run <code>/speckit.keel.guide</code>.</li>'
+      + '<li>If you use <code>/speckit-specify</code>, run <code>/speckit-keel-guide</code>.</li>'
+      + '<li>If you use <code>$speckit-specify</code>, run <code>$speckit-keel-guide</code>.</li>'
+      + '</ul>'
+      + SAME_WORKFLOW_NOTE;
+  }
+
+  function advancedHTML(preId, key){
+    var agentKey = (key === 'claude' || key === 'codex' || key === 'copilot') ? key : 'other';
+    var commands = KEEL_AGENTS[agentKey].commands;
+    var note = agentKey === 'copilot' ? '<p class="agent-note" style="margin:0 0 8px;">Skill names — not slash commands.</p>' : '';
+    return note + '<div class="codeblock"><pre id="'+preId+'">'+commands.join('\n')+'</pre><button class="copybtn" data-target="'+preId+'" data-goatcounter-click="copy-advanced-commands">copy</button></div>';
+  }
+
+  function applyAgent(key, persist){
+    var startHave = document.getElementById('start-keel-have');
+    var startNew = document.getElementById('start-keel-new');
+    var advHave = document.getElementById('advanced-commands-have');
+    var advNew = document.getElementById('advanced-commands-new');
+    if(startHave) startHave.innerHTML = startKeelHTML('c3', key);
+    if(startNew) startNew.innerHTML = startKeelHTML('c9', key);
+    if(advHave) advHave.innerHTML = advancedHTML('c10', key);
+    if(advNew) advNew.innerHTML = advancedHTML('c11', key);
+
+    document.querySelectorAll('.agent-btn').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-agent') === key ? 'true' : 'false');
+    });
+
+    var prompt = document.getElementById('agent-select-prompt');
+    if(prompt){
+      prompt.textContent = key
+        ? 'Showing Keel Guide instructions for ' + KEEL_AGENTS[key].label + '. Choose a different coding agent above to change this.'
+        : 'Choose your coding agent to see the correct way to run Keel.';
+    }
+
+    if(persist){
+      try{ localStorage.setItem(STORAGE_KEY, key); }catch(e){}
+    }
+  }
+
+  document.querySelectorAll('.agent-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyAgent(btn.getAttribute('data-agent'), true);
+    });
+  });
+
+  var saved = null;
+  try{ saved = localStorage.getItem(STORAGE_KEY); }catch(e){}
+  if(saved && KEEL_AGENTS[saved]){
+    applyAgent(saved, false);
+  } else {
+    applyAgent(null, false);
   }
 })();
 </script>
