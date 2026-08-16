@@ -107,12 +107,60 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 }
 .diagram-caption{font-size:13px; color:var(--ink-faint); margin-top:14px; max-width:60ch;}
 
-/* ---------- qualify band (bridges hero -> why) ---------- */
-.qualify-band{background:var(--surface); border-bottom:1px solid var(--line-soft); padding:36px 0;}
-.qualify-band p{
-  max-width:56ch; margin:0 auto; text-align:center; font-family:var(--font-body); font-weight:600;
-  font-size:clamp(18px,2vw,21px); line-height:1.5; color:var(--ink); text-wrap:balance;
+/* ---------- persona choice (bridges hero -> content) ---------- */
+.persona-band{background:var(--surface); border-bottom:1px solid var(--line-soft); padding:40px 0;}
+.persona-band > .wrap > p.persona-lead{
+  max-width:56ch; margin:0 auto 24px; text-align:center; font-family:var(--font-body); font-weight:600;
+  font-size:clamp(17px,1.8vw,19px); line-height:1.5; color:var(--ink); text-wrap:balance;
 }
+.persona-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:840px; margin:0 auto;}
+.persona-card{
+  background:var(--surface-2); border:1px solid var(--line); border-radius:12px; padding:22px 24px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.persona-card .tag{font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+.persona-card h3{font-size:17.5px;}
+.persona-card p{color:var(--ink-soft); font-size:14px; margin:0; flex:1;}
+.persona-card .btn{align-self:flex-start; margin-top:4px;}
+@media (max-width:660px){ .persona-grid{grid-template-columns:1fr;} }
+
+/* ---------- new-founder plain-language section ---------- */
+.steps-list{counter-reset:step; display:flex; flex-direction:column; gap:0; margin:24px 0 0;}
+.steps-item{
+  counter-increment:step; display:flex; gap:16px; padding:16px 0;
+  border-bottom:1px solid var(--line-soft);
+}
+.steps-item:last-child{border-bottom:none;}
+.steps-item::before{
+  content:counter(step); flex-shrink:0; width:30px; height:30px; border-radius:50%;
+  background:var(--brass-bg); color:var(--brass); font-family:var(--font-mono); font-weight:700; font-size:13.5px;
+  display:flex; align-items:center; justify-content:center;
+}
+.steps-item p{margin:0; padding-top:4px; font-size:15px; color:var(--ink);}
+.outputs-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:28px;}
+.output-chip{
+  background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+  font-size:13.8px; color:var(--ink-soft); display:flex; align-items:center; gap:10px;
+}
+.output-chip .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); flex-shrink:0;}
+@media (max-width:720px){ .outputs-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:480px){ .outputs-grid{grid-template-columns:1fr;} }
+
+/* ---------- technical-details disclosure (reused across novice-facing panels) ---------- */
+.tech-disclosure{margin-top:14px; border-top:1px solid var(--line-soft); padding-top:12px;}
+.tech-disclosure summary{
+  cursor:pointer; list-style:none; font-size:12.5px; font-weight:600; color:var(--ink-faint);
+  display:flex; align-items:center; gap:7px; user-select:none;
+}
+.tech-disclosure summary::-webkit-details-marker{display:none;}
+.tech-disclosure summary:hover{color:var(--brass);}
+.tech-disclosure .chev{
+  display:inline-block; width:7px; height:7px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg); transition:transform .15s ease; margin-top:-2px;
+}
+.tech-disclosure[open] summary .chev{transform:rotate(-135deg); margin-top:2px;}
+.tech-disclosure .term{margin-top:12px;}
+.idtag{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint);}
 
 /* ---------- sections ---------- */
 section{padding:64px 0; border-bottom:1px solid var(--line-soft);}
@@ -301,10 +349,10 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       Keel
     </a>
     <div class="navlinks">
-      <a href="#why" data-goatcounter-click="nav-why">Why</a>
-      <a href="#how" data-goatcounter-click="nav-how">How it works</a>
+      <a href="#newfounder" data-goatcounter-click="nav-newfounder">New here?</a>
+      <a href="#tryit" data-goatcounter-click="nav-tryit">Worked example</a>
+      <a href="#why" data-goatcounter-click="nav-why">Why alongside Spec Kit</a>
       <a href="#install" data-goatcounter-click="nav-install">Install</a>
-      <a href="#tryit" data-goatcounter-click="nav-tryit">Try it</a>
     </div>
     <div class="navright">
       <span class="navtag">v0.2.0</span>
@@ -320,15 +368,13 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
   <div class="wrap">
     <div class="eyebrow">Spec Kit Extension</div>
     <h1>Prove it, then build it.</h1>
-    <p class="dek">Keel is a guided discovery layer for Spec Kit. It blocks
-    its own evidence-backed brief until real interviews back your idea up —
-    a script that actually exits non-zero, not a chatbot that agrees with
-    you. Once the brief exists, Keel hands off to Spec Kit's own pipeline
-    to build the thing for real, and checks what shipped against what you
-    learned.</p>
+    <p class="dek">Validate the idea before AI builds the wrong product.
+    Keel turns customer interviews into a build decision and an
+    evidence-backed brief for Spec Kit. After implementation, it checks
+    that what shipped still matches what users told you.</p>
     <div class="cta-row">
-      <a class="btn primary" href="#tryit" data-goatcounter-click="hero-try-flow">Try the flow ↓</a>
-      <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">Install →</a>
+      <a class="btn primary" href="#newfounder" data-goatcounter-click="hero-newfounder">I'm new — show me the workflow</a>
+      <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">I use Spec Kit — install Keel</a>
     </div>
     <p class="caveat">Keel doesn't write your code, and it won't pad
     evidence to make its own gate pass. It also can't stop you from
@@ -414,20 +460,153 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
   </div>
 </header>
 
-<div class="qualify-band">
+<div class="persona-band">
   <div class="wrap">
-    <p>Built for the moment right before you'd normally just start typing
-    into <code>/speckit.specify</code>. If you've got an idea and aren't
-    sure it's worth building, Keel walks you through finding out — then
-    carries you straight into Spec Kit to make it real.</p>
+    <p class="persona-lead">Built for the moment right before you'd normally just start building. Which one are you?</p>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <span class="tag">New to AI-SDLC</span>
+        <h3>I've got an idea, not a spec</h3>
+        <p>Never run a coding agent from a written spec before. Skip the jargon — start with what Keel actually does for you, in plain language.</p>
+        <a class="btn ghost" href="#newfounder" data-goatcounter-click="persona-newfounder">Show me the workflow</a>
+      </div>
+      <div class="persona-card">
+        <span class="tag">Already using Spec Kit</span>
+        <h3>I know where this fits</h3>
+        <p>Keel adds evidence-backed discovery before <code>/speckit.specify</code> and a drift audit after implementation. Nothing else changes.</p>
+        <a class="btn ghost" href="#install" data-goatcounter-click="persona-install">Install Keel</a>
+      </div>
+    </div>
   </div>
 </div>
 
 <main>
+<section id="newfounder">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">New here?</div>
+      <h2>How Keel takes an idea to a decision</h2>
+      <p>No terminal experience required to follow this — it's the same
+      process either way, just described without the command names.</p>
+    </div>
+    <div class="steps-list">
+      <div class="steps-item"><p>Describe your idea.</p></div>
+      <div class="steps-item"><p>Keel identifies the risky assumptions your idea depends on, and who you'd need to talk to in order to test them.</p></div>
+      <div class="steps-item"><p>You add interview evidence — notes from real conversations, one at a time.</p></div>
+      <div class="steps-item"><p>Keel recommends one of five things: pivot, gather more evidence, reduce the risk, narrow the idea, or proceed.</p></div>
+      <div class="steps-item"><p>Once the evidence clears the bar, the validated brief moves into the AI build workflow (Spec Kit) to actually get built.</p></div>
+      <div class="steps-item"><p>After it ships, Keel checks the finished product against the evidence — and tells you where it drifted.</p></div>
+    </div>
+    <h3 style="font-size:16px; margin:34px 0 4px;">What you get out of it</h3>
+    <div class="outputs-grid">
+      <div class="output-chip"><span class="dot"></span>Who to interview</div>
+      <div class="output-chip"><span class="dot"></span>Questions to ask</div>
+      <div class="output-chip"><span class="dot"></span>Assumptions requiring proof</div>
+      <div class="output-chip"><span class="dot"></span>Evidence-backed recommendation</div>
+      <div class="output-chip"><span class="dot"></span>Validated product brief</div>
+      <div class="output-chip"><span class="dot"></span>Post-build drift audit</div>
+    </div>
+    <div class="cta-row" style="margin-top:32px;">
+      <a class="btn primary" href="#tryit" data-goatcounter-click="newfounder-worked-example">See a worked example ↓</a>
+    </div>
+  </div>
+</section>
+
+<section id="tryit">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Worked example — no install required</div>
+      <h2>Walk one discovery cycle end to end</h2>
+      <p class="measure">A fixed walkthrough, not a live input — reveal each
+      interview below to watch the assumptions, the decision, and the
+      recommendation update, using the same coverage/saturation math
+      <code>keel-gate.sh</code> runs for real.</p>
+    </div>
+
+    <div class="stepper" id="stepper"></div>
+
+    <div class="scenario-card">
+      <span class="tag" style="font-family:var(--font-mono); font-size:11px; color:var(--brass);">the idea</span>
+      <h3>TeamPulse Digest</h3>
+      <p style="color:var(--ink-soft); font-size:14.5px;">A Slack bot for engineering managers that reads standup
+      threads and drafts a weekly digest of progress, blockers, and risk —
+      with a mandatory human-review step before anything sends. Underlying
+      belief: managers lose real time every week reconstructing team status
+      by hand, and a reviewed draft would recover it without adding risk.</p>
+      <div class="tbl-scroll">
+        <table class="assump-tbl">
+          <colgroup>
+            <col><col style="width:82px"><col style="width:104px"><col style="width:104px">
+          </colgroup>
+          <thead><tr><th>Assumption</th><th>Risk</th><th>Evidence</th><th>Status</th></tr></thead>
+          <tbody id="assump-body"></tbody>
+        </table>
+      </div>
+      <p class="tbl-hint">Swipe to see all columns →</p>
+    </div>
+
+    <div class="scenario-card">
+      <h3 style="margin-bottom:14px;">Conduct the interviews</h3>
+      <div id="interviews"></div>
+    </div>
+
+    <div class="gate-panel">
+      <h3>Decision — what happens if you ran <code>/speckit.keel.brief</code> right now</h3>
+      <div class="next-action" id="next-action"></div>
+      <details class="tech-disclosure">
+        <summary>View command details <span class="chev" aria-hidden="true"></span></summary>
+        <div class="term" id="gate-term"></div>
+      </details>
+    </div>
+
+    <div class="brief-out" id="brief-out">
+      <h3>keel/brief.md</h3>
+      <h4>Evidence-backed problem statement</h4>
+      <p>Managers spend real, recurring weekly time reconstructing team status by hand.</p>
+      <h4>What to build</h4>
+      <p>A weekly digest with a <strong>mandatory</strong> human-review step before send — not a nice-to-have, the specific mechanism the evidence says makes an AI-authored summary acceptable at all.</p>
+      <h4>Residual risk carried into build</h4>
+      <p>The human-review-step assumption cleared the gate at "supported," not "validated," on exactly two roles. One of the two engineering managers trusted the review step only <em>conditionally</em> — treat initial rollout trust as earned per manager, not solved by shipping the review button.</p>
+      <details class="tech-disclosure">
+        <summary>Technical traceability <span class="chev" aria-hidden="true"></span></summary>
+        <p style="margin-top:10px; font-size:13px; color:var(--ink-faint);">Problem statement traces to <span class="idtag">A-001, E-001/E-003</span>. Build requirement traces to <span class="idtag">A-002, E-001/E-002/E-003</span>, marked <code>keel: A-001, A-002</code> in the brief itself. Residual-risk note references <span class="idtag">E-002</span>.</p>
+      </details>
+      <p class="locked-note" id="brief-locked">Unlocks once the decision above reads <strong>OK</strong>.</p>
+    </div>
+
+    <div style="margin-top:34px;">
+      <h3 style="font-size:17px; margin-bottom:10px;">Or run it for real</h3>
+      <p class="measure" style="color:var(--ink-soft); font-size:14.5px;">This walks the same five commands as the
+      worked example above, in your own project, once the extension is
+      installed — or paste just <code>/speckit.keel.init</code>'s argument
+      into <code>/speckit.keel.guide</code> and stay in one conversation; it
+      runs the same five phases and tells you when to paste the next
+      interview. <code>/speckit.keel.init</code> generates assumptions via
+      an LLM, so your actual wording won't match the fixed example above —
+      the mechanism (evidence extraction, gate math, decision menu) is
+      identical.</p>
+      <div class="codeblock">
+        <pre id="c4">/speckit.keel.init "TeamPulse Digest: a Slack bot for engineering managers that reads standup threads and drafts a weekly digest of progress, blockers, and risk, with a mandatory human-review step before anything sends. Belief: managers lose real time every week reconstructing team status by hand."
+
+/speckit.keel.add-evidence "Participant: engineering_manager (EM-1). Q: Walk me through the last time you told your manager what your team worked on last week. A: Every Friday I go through six different threads to figure out what shipped — it's an hour, every week. Also: if a bot drafted that and I could fix the two things it got wrong, I'd take that trade."
+
+/speckit.keel.add-evidence "Participant: engineering_manager (EM-2). Q: If someone handed you a draft summary of your team's week, what would you do with it before passing it along? A: If I'm the one who has to sign off, sure, I'd trust that more than something that fires off on its own. I might still double-check the first few, until I trust it."
+
+/speckit.keel.add-evidence "Participant: director (DIR-1). Q: How do you feel about a machine drafting your team's status report? A: As long as my EM has read it and signed off, I don't care who wrote the first draft. The review step is the whole thing for me."
+
+/speckit.keel.check
+
+/speckit.keel.brief</pre>
+        <button class="copybtn" data-target="c4" data-goatcounter-click="copy-all-demo-commands">copy all</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="why">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Why</div>
+      <div class="eyebrow">Why alongside Spec Kit</div>
       <h2>Nothing upstream checks whether the idea deserved a spec</h2>
       <p>Spec Kit is very good at turning a specification into working
       software. It has no opinion on whether the specification should have
@@ -604,87 +783,6 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
   </div>
 </section>
 
-<section id="tryit">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Try it — no install required</div>
-      <h2>Walk one discovery cycle end to end</h2>
-      <p class="measure">A real product idea, a real (short) interview guide,
-      and three interviews you reveal one at a time. Watch the assumptions
-      table, the gate, and the recommendation change after each one — this
-      is exactly what <code>keel-gate.sh</code> computes for real, including
-      where it blocks.</p>
-    </div>
-
-    <div class="stepper" id="stepper"></div>
-
-    <div class="scenario-card">
-      <span class="tag" style="font-family:var(--font-mono); font-size:11px; color:var(--brass);">the idea</span>
-      <h3>TeamPulse Digest</h3>
-      <p style="color:var(--ink-soft); font-size:14.5px;">A Slack bot for engineering managers that reads standup
-      threads and drafts a weekly digest of progress, blockers, and risk —
-      with a mandatory human-review step before anything sends. Underlying
-      belief: managers lose real time every week reconstructing team status
-      by hand, and a reviewed draft would recover it without adding risk.</p>
-      <div class="tbl-scroll">
-        <table class="assump-tbl">
-          <colgroup>
-            <col style="width:66px"><col><col style="width:82px"><col style="width:104px"><col style="width:104px">
-          </colgroup>
-          <thead><tr><th>ID</th><th>Statement</th><th>Risk</th><th>Evidence</th><th>Status</th></tr></thead>
-          <tbody id="assump-body"></tbody>
-        </table>
-      </div>
-      <p class="tbl-hint">Swipe to see all columns →</p>
-    </div>
-
-    <div class="scenario-card">
-      <h3 style="margin-bottom:14px;">Conduct the interviews</h3>
-      <div id="interviews"></div>
-    </div>
-
-    <div class="gate-panel">
-      <h3>Gate — what <code>/speckit.keel.brief</code> would do right now</h3>
-      <div class="term" id="gate-term"></div>
-      <div class="next-action" id="next-action"></div>
-    </div>
-
-    <div class="brief-out" id="brief-out">
-      <h3>keel/brief.md</h3>
-      <h4>Evidence-backed problem statement</h4>
-      <p>Managers spend real, recurring weekly time reconstructing team status by hand (A-001, E-001/E-003).</p>
-      <h4>What to build</h4>
-      <p>A weekly digest with a <strong>mandatory</strong> human-review step before send — not a nice-to-have, the specific mechanism the evidence says makes an AI-authored summary acceptable at all (A-002, E-001/E-002/E-003). <code>keel: A-001, A-002</code></p>
-      <h4>Residual risk carried into build</h4>
-      <p>A-002 cleared the gate at "supported," not "validated," on exactly two roles. One of the two engineering managers (E-002) trusted the review step only <em>conditionally</em> — treat initial rollout trust as earned per manager, not solved by shipping the review button.</p>
-      <p class="locked-note" id="brief-locked">Unlocks once the gate above reads <strong>OK</strong>.</p>
-    </div>
-
-    <div style="margin-top:34px;">
-      <h3 style="font-size:17px; margin-bottom:10px;">Or run it for real</h3>
-      <p class="measure" style="color:var(--ink-soft); font-size:14.5px;">Everything above is exactly what these five
-      commands would produce. Paste them in order, in your own project, once
-      the extension is installed — or paste just <code>/speckit.keel.init</code>'s
-      argument into <code>/speckit.keel.guide</code> and stay in one conversation;
-      it runs the same five phases for you and tells you when to paste the
-      next interview.</p>
-      <div class="codeblock">
-        <pre id="c4">/speckit.keel.init "TeamPulse Digest: a Slack bot for engineering managers that reads standup threads and drafts a weekly digest of progress, blockers, and risk, with a mandatory human-review step before anything sends. Belief: managers lose real time every week reconstructing team status by hand."
-
-/speckit.keel.add-evidence "Participant: engineering_manager (EM-1). Q: Walk me through the last time you told your manager what your team worked on last week. A: Every Friday I go through six different threads to figure out what shipped — it's an hour, every week. Also: if a bot drafted that and I could fix the two things it got wrong, I'd take that trade."
-
-/speckit.keel.add-evidence "Participant: engineering_manager (EM-2). Q: If someone handed you a draft summary of your team's week, what would you do with it before passing it along? A: If I'm the one who has to sign off, sure, I'd trust that more than something that fires off on its own. I might still double-check the first few, until I trust it."
-
-/speckit.keel.add-evidence "Participant: director (DIR-1). Q: How do you feel about a machine drafting your team's status report? A: As long as my EM has read it and signed off, I don't care who wrote the first draft. The review step is the whole thing for me."
-
-/speckit.keel.check
-
-/speckit.keel.brief</pre>
-        <button class="copybtn" data-target="c4" data-goatcounter-click="copy-all-demo-commands">copy all</button>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
 <footer>
@@ -777,8 +875,7 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
       var a=assumptions[id];
       var tr=document.createElement('tr');
       tr.innerHTML =
-        '<td class="mono" style="font-weight:700; color:var(--ink);">'+id+'</td>'+
-        '<td class="stmt">'+a.statement+'</td>'+
+        '<td class="stmt">'+a.statement+' <span class="idtag">('+id+')</span></td>'+
         '<td><span class="risk-badge '+a.risk+'">'+a.risk+'</span></td>'+
         '<td class="ev-ids">'+(a.evidence.length? a.evidence.join(', ') : '—')+'</td>'+
         '<td><span class="status-badge '+(a.status==='open'?'open':'supported')+'">'+a.status+'</span></td>';
@@ -794,16 +891,17 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
       var card=document.createElement('div');
       card.className='interview';
       var claimsHtml = iv.claims.map(function(c){
-        return '<div class="claim"><b>→ '+c.assumption+'</b><span>'+c.note+'</span></div>';
+        return '<div class="claim">'+c.note+' <span class="idtag">→ '+c.assumption+'</span></div>';
       }).join('');
       card.innerHTML =
         '<div class="interview-head">'+
-          '<div class="left"><span class="roletag">'+iv.roleLabel+'</span><h4>'+iv.id+' — '+iv.name+'</h4></div>'+
+          '<div class="left"><span class="roletag">'+iv.roleLabel+'</span><h4>Interview with '+iv.name+'</h4></div>'+
           '<button class="reveal-btn" '+(revealed[i]?'disabled':(locked?'disabled':''))+' data-i="'+i+'" data-goatcounter-click="demo-interview-'+iv.id+'">'+(revealed[i]?'Revealed':(locked?'Locked':'Conduct interview'))+'</button>'+
         '</div>'+
         '<div class="interview-body'+(revealed[i]?' open':'')+'">'+
           '<div class="qa"><div class="q">Q: '+iv.q+'</div><div class="a">'+iv.a+'</div></div>'+
           '<div class="claimlist">'+claimsHtml+'</div>'+
+          '<div class="idtag">Evidence ID: '+iv.id+'</div>'+
         '</div>';
       wrap.appendChild(card);
     });
@@ -855,7 +953,7 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
   }
 
   function renderStepper(){
-    var labels=['Hypothesis','Interviews','Gate','Brief'];
+    var labels=['Hypothesis','Interviews','Decision','Brief'];
     var ev=evidenceCount();
     var gateOk = ev>=3 && distinctRoles().length>=2 && assumptions['A-002'].status!=='open';
     var stage;
