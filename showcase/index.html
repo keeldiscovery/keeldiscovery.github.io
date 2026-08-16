@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ShipLog, start to finish: a real hypothesis, four interviews, a gate that actually blocked, a shipped app, and an audit — one real Keel + Spec Kit run.">
+<link rel="canonical" href="https://keeldiscovery.com/showcase/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%93%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://keeldiscovery.com/showcase/">
+<meta property="og:title" content="ShipLog — a Keel showcase, start to finish">
+<meta property="og:description" content="A real hypothesis, four interviews, a gate that actually blocked, a shipped app, and an audit — one real Keel + Spec Kit run.">
+<meta property="og:image" content="https://keeldiscovery.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShipLog — a Keel showcase, start to finish">
+<meta name="twitter:description" content="A real hypothesis, four interviews, a gate that actually blocked, a shipped app, and an audit — one real Keel + Spec Kit run.">
+<meta name="twitter:image" content="https://keeldiscovery.com/og.png">
+<script data-goatcounter="https://keeldiscovery.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<title>ShipLog — a Keel showcase, start to finish</title>
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --surface-2:#f0efeb;
+  --ink:#191a18; --ink-soft:#5c5d59; --ink-faint:#8a8b86;
+  --line:#e3e3e0; --line-soft:#ececea;
+  --teal:#1f6f63; --rust:#9c3f22; --brass:#a8641c;
+  --teal-bg:#deefe9; --rust-bg:#f6ded0; --brass-bg:#f5e6cc;
+  --shadow:0 1px 2px rgba(20,20,18,0.05), 0 10px 24px rgba(20,20,18,0.06);
+  --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151614; --surface:#151614; --surface-2:#1e201d;
+    --ink:#f0f0ee; --ink-soft:#a8a9a4; --ink-faint:#7b7c78;
+    --line:#302f2b; --line-soft:#252622;
+    --teal:#5cc0aa; --rust:#e2835a; --brass:#e2a24f;
+    --teal-bg:#15271f; --rust-bg:#301c10; --brass-bg:#33230f;
+    --shadow:0 1px 2px rgba(0,0,0,0.35), 0 14px 34px rgba(0,0,0,0.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151614; --surface:#151614; --surface-2:#1e201d;
+  --ink:#f0f0ee; --ink-soft:#a8a9a4; --ink-faint:#7b7c78;
+  --line:#302f2b; --line-soft:#252622;
+  --teal:#5cc0aa; --rust:#e2835a; --brass:#e2a24f;
+  --teal-bg:#15271f; --rust-bg:#301c10; --brass-bg:#33230f;
+  --shadow:0 1px 2px rgba(0,0,0,0.35), 0 14px 34px rgba(0,0,0,0.4);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+a{color:var(--brass);}
+code,.mono{font-family:var(--font-mono);}
+h1,h2,h3{font-family:var(--font-body); font-weight:700; text-wrap:balance; color:var(--ink); margin:0;}
+p{margin:0 0 12px;}
+img{max-width:100%; display:block;}
+.measure{max-width:62ch;}
+button{font-family:inherit; cursor:pointer;}
+:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+
+/* ---------- shell (same as main site) ---------- */
+.wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+nav.top{
+  position:sticky; top:0; z-index:20; background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--line-soft);
+}
+nav.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:20px;}
+.brand{display:flex; align-items:center; gap:9px; color:var(--ink); font-family:var(--font-body); font-size:19px; font-weight:700; text-decoration:none;}
+.brand svg{width:22px; height:17px; color:var(--brass);}
+.navlinks{display:flex; gap:26px; font-size:14.5px;}
+.navlinks a{color:var(--ink-soft); text-decoration:none; font-weight:500;}
+.navlinks a:hover, .navlinks a.current{color:var(--brass);}
+.navtag{font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); border:1px solid var(--line); border-radius:100px; padding:2px 9px;}
+.navright{display:flex; align-items:center; gap:14px;}
+.iconlink{display:flex; align-items:center; color:var(--ink-soft);}
+.iconlink:hover{color:var(--brass);}
+.iconlink svg{width:19px; height:19px;}
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:8px;
+  font-size:14.5px; font-weight:600; text-decoration:none; border:1px solid transparent;
+}
+.btn.primary{background:var(--brass); color:#fffaf0;}
+.btn.primary:hover{background:color-mix(in srgb, var(--brass) 85%, black);}
+.btn.ghost{border-color:var(--line); color:var(--ink);}
+.btn.ghost:hover{border-color:var(--brass); color:var(--brass);}
+
+/* ---------- sections (same as main site) ---------- */
+section{padding:64px 0; border-bottom:1px solid var(--line-soft);}
+section:last-of-type{border-bottom:none;}
+.section-head{max-width:70ch; margin-bottom:32px;}
+.section-head .eyebrow{font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass); font-weight:700; margin-bottom:8px;}
+.section-head h2{font-size:clamp(26px,3vw,34px);}
+.section-head p{color:var(--ink-soft); margin-top:10px; font-size:16.5px;}
+
+.term{
+  background:#0d161d; color:#d7e2df; border:1px solid #26363f; border-radius:8px; padding:14px 16px;
+  font-family:var(--font-mono); font-size:12.8px; line-height:1.65; overflow-x:auto; white-space:pre;
+}
+.term .rust{color:#e79a72;}
+.term .ok{color:#7fd0b0;}
+.term .warn{color:#e8c988;}
+
+.codeblock{position:relative; margin-top:10px;}
+.codeblock pre{
+  background:#0d161d; color:#d7e2df; border:1px solid #26363f; border-radius:8px; padding:13px 46px 13px 16px;
+  font-family:var(--font-mono); font-size:13px; margin:0; white-space:pre-wrap; word-break:break-word; overflow-wrap:anywhere;
+}
+.copybtn{
+  position:absolute; top:8px; right:8px; background:#1c2b31; color:#9fb3ad; border:1px solid #2c3d43;
+  border-radius:6px; padding:4px 9px; font-size:11px; font-family:var(--font-body);
+}
+.copybtn:hover{color:#eef2ee; border-color:#5fc3ac;}
+.copybtn.copied{color:#7fd0b0; border-color:#7fd0b0;}
+
+.tbl-scroll{overflow-x:auto; margin-top:14px; -webkit-overflow-scrolling:touch; border-radius:8px; border:1px solid var(--line);}
+.tbl-hint{display:none; font-size:12px; color:var(--ink-faint); margin-top:6px;}
+@media (max-width:660px){ .tbl-hint{display:block;} }
+.assump-tbl{width:100%; min-width:600px; border-collapse:collapse; font-size:13.8px; table-layout:fixed; background:var(--surface);}
+.assump-tbl th{text-align:left; font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-faint); padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap; background:var(--surface-2);}
+.assump-tbl td{padding:10px; border-bottom:1px solid var(--line-soft); vertical-align:top; white-space:nowrap;}
+.assump-tbl tr:last-child td{border-bottom:none;}
+.assump-tbl td.stmt{white-space:normal;}
+@media (max-width:600px){ .assump-tbl{font-size:13px;} }
+.risk-badge{font-family:var(--font-mono); font-size:11px; padding:2px 8px; border-radius:100px; font-weight:700;}
+.risk-badge.high{background:var(--rust-bg); color:var(--rust);}
+.risk-badge.medium{background:var(--brass-bg); color:var(--brass);}
+.risk-badge.low{background:var(--line-soft); color:var(--ink-faint);}
+.status-badge{font-family:var(--font-mono); font-size:11.5px; padding:2px 9px; border-radius:100px; font-weight:600;}
+.status-badge.open{background:var(--line-soft); color:var(--ink-faint);}
+.status-badge.supported{background:var(--teal-bg); color:var(--teal);}
+.status-badge.contradicted{background:var(--rust-bg); color:var(--rust);}
+.idc{font-family:var(--font-mono); font-weight:700; color:var(--ink);}
+
+.interview{background:var(--surface); border:1px solid var(--line); border-radius:12px; margin-bottom:14px; overflow:hidden;}
+.interview-head{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 20px; flex-wrap:wrap;}
+.interview-head .left{display:flex; align-items:center; gap:12px;}
+.roletag{font-family:var(--font-mono); font-size:11.5px; padding:3px 10px; border-radius:100px; background:var(--line-soft); color:var(--ink-soft); font-weight:600;}
+.interview-head h4{font-size:15px; margin:0; color:var(--ink);}
+.interview-body{padding:0 20px 20px; display:flex; flex-direction:column; gap:12px;}
+.qa{display:flex; flex-direction:column; gap:6px;}
+.qa .q{font-size:13.5px; color:var(--ink-faint); font-style:italic;}
+.qa .a{font-size:14.5px; color:var(--ink); background:var(--surface-2); border-left:3px solid var(--teal); padding:10px 14px; border-radius:0 6px 6px 0;}
+.claimlist{display:flex; flex-direction:column; gap:6px; margin-top:2px;}
+.claim{font-size:13px; color:var(--ink-soft); display:flex; gap:8px; align-items:baseline;}
+.claim b{color:var(--ink); font-family:var(--font-mono); font-size:12px; flex-shrink:0;}
+.claim.contra b{color:var(--rust);}
+.claim.support b{color:var(--teal);}
+
+.guide-lead{
+  background:var(--surface); border:1px solid var(--brass); border-radius:12px; padding:24px 26px;
+  box-shadow:var(--shadow); display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;
+}
+.guide-lead .glyph{
+  width:38px; height:38px; border-radius:9px; background:var(--brass-bg); color:var(--brass);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.guide-lead .body{flex:1; min-width:240px;}
+.guide-lead h3{font-size:17.5px; margin-bottom:6px;}
+.guide-lead code{color:var(--brass); font-weight:700;}
+.guide-lead p{color:var(--ink-soft); font-size:14.5px; margin:0;}
+
+footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:var(--surface-2);}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px;}
+.footer-brand .brand{margin-bottom:10px;}
+.footer-brand p{color:var(--ink-faint); font-size:13.5px; max-width:34ch; margin:0;}
+.footer-h{display:block; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; margin-bottom:10px;}
+.footer-col{display:flex; flex-direction:column; gap:8px; font-size:13.8px;}
+.footer-col a{color:var(--ink-soft); text-decoration:none;}
+.footer-col a:hover{color:var(--brass);}
+.footer-col .muted{color:var(--ink-faint); font-size:12.5px;}
+.footer-bottom{margin-top:36px; padding-top:20px; border-top:1px solid var(--line-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:12.5px; color:var(--ink-faint);}
+@media (max-width:680px){ .footer-grid{grid-template-columns:1fr;} }
+
+/* ---------- showcase-page-only additions, same visual language ---------- */
+.sc-hero{padding:64px 0 0;}
+.sc-hero .eyebrow{font-family:var(--font-body); font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--brass); font-weight:700; margin-bottom:14px;}
+.sc-hero h1{font-size:clamp(32px,5.4vw,52px); line-height:1.06; max-width:19ch;}
+.sc-hero .dek{font-size:18px; color:var(--ink-soft); max-width:62ch; margin-top:18px;}
+.stat-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
+.stat{display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:100px;}
+.stat.ok{color:var(--teal); background:var(--teal-bg);}
+.stat.brass{color:var(--brass); background:var(--brass-bg);}
+.stat .dot{width:6px; height:6px; border-radius:50%; background:currentColor;}
+.sc-hero .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
+.sc-logline{margin-top:30px; padding-top:20px; border-top:1px solid var(--line-soft); font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint);}
+
+.spine{position:relative; padding-left:30px;}
+.spine::before{content:""; position:absolute; left:4px; top:4px; bottom:4px; width:1.5px; background:var(--line);}
+.beat{position:relative; margin-bottom:56px;}
+.beat:last-child{margin-bottom:0;}
+.beat::before{content:""; position:absolute; left:-30px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--bg); border:2px solid var(--brass);}
+.beat .step-label{display:block; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px;}
+.beat h3{font-size:clamp(21px,2.6vw,25px); margin-bottom:8px;}
+.beat .beat-lede{color:var(--ink-soft); font-size:15px; max-width:64ch; margin-top:4px;}
+.beat .beat-body{margin-top:20px; display:flex; flex-direction:column; gap:14px;}
+.beat .beat-body p{color:var(--ink-soft); font-size:15px; max-width:64ch; margin:0;}
+.beat .beat-body p strong{color:var(--ink);}
+
+.disclosure{display:flex; gap:12px; align-items:flex-start; background:var(--brass-bg); border:1px solid var(--brass); border-radius:10px; padding:15px 17px; font-size:13.6px; color:var(--ink);}
+.disclosure .mk{font-family:var(--font-mono); font-weight:700; color:var(--brass); flex-shrink:0; letter-spacing:.03em; font-size:11.5px; padding-top:2px;}
+
+.pipeline{display:flex; flex-wrap:wrap; gap:8px;}
+.pnode{display:flex; align-items:center; gap:8px; padding:9px 14px; border-radius:8px; border:1px solid var(--line); background:var(--surface); font-family:var(--font-mono); font-size:12px; color:var(--ink-soft);}
+.pnode .n{width:16px; height:16px; border-radius:50%; background:var(--teal-bg); color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:10px;}
+.pnode.flag{border-color:var(--brass); color:var(--ink);}
+.pnode.flag .n{background:var(--brass-bg); color:var(--brass);}
+
+.shots{display:flex; flex-direction:column; gap:22px;}
+.shot{border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface);}
+.shot img{width:100%; height:auto;}
+.shot figcaption{font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); padding:11px 15px; background:var(--surface-2); border-top:1px solid var(--line);}
+
+#fieldnotes{background:var(--surface-2);}
+.note-card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px 22px; box-shadow:var(--shadow); margin-bottom:14px; display:flex; gap:18px; flex-wrap:wrap;}
+.note-card:last-child{margin-bottom:0;}
+.note-card .tag{flex-shrink:0; width:112px; font-family:var(--font-mono); font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding-top:2px;}
+.note-card .tag.bug{color:var(--rust);}
+.note-card .tag.doc{color:var(--brass);}
+.note-card .tag.design{color:var(--teal);}
+.note-card .tag.works{color:var(--teal);}
+.note-card .content{flex:1; min-width:220px;}
+.note-card .content h4{font-family:var(--font-body); font-weight:700; font-size:15px; color:var(--ink); margin-bottom:5px;}
+.note-card .content p{font-size:13.8px; color:var(--ink-soft); margin:0;}
+
+.cta-final{background:var(--surface); border:1px solid var(--teal); border-radius:12px; padding:28px 30px; box-shadow:var(--shadow); text-align:center;}
+.cta-final h3{font-size:20px; margin-bottom:10px;}
+.cta-final p{color:var(--ink-soft); font-size:15px; max-width:52ch; margin:0 auto 20px;}
+.cta-final .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+@media (max-width:820px){
+  .navlinks{display:none;}
+}
+@media (max-width:640px){
+  .spine{padding-left:20px;}
+  .beat::before{left:-20px;}
+  .note-card{flex-direction:column; gap:6px;}
+  .note-card .tag{width:auto;}
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
+      Keel
+    </a>
+    <div class="navlinks">
+      <a href="/#why" data-goatcounter-click="showcase-nav-why">Why</a>
+      <a href="/#how" data-goatcounter-click="showcase-nav-how">How it works</a>
+      <a href="/#install" data-goatcounter-click="showcase-nav-install">Install</a>
+      <a href="/#tryit" data-goatcounter-click="showcase-nav-tryit">Try it</a>
+      <a href="/showcase/" class="current" data-goatcounter-click="showcase-nav-showcase">Showcase</a>
+    </div>
+    <div class="navright">
+      <span class="navtag">v0.2.0</span>
+      <a class="iconlink" href="https://github.com/keeldiscovery/spec-kit-keel" aria-label="View source on GitHub" data-goatcounter-click="showcase-nav-github">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="sc-hero">
+  <div class="wrap">
+    <div class="eyebrow">A showcase — dogfooding feature/guided-validation-workflow</div>
+    <h1>One idea, run through the real gate, start to finish.</h1>
+    <p class="dek">Not a demo written to look good. ShipLog is the literal output of one real pass through Keel and Spec Kit — a hypothesis, four interviews, a gate that actually blocked and then passed, a shipped app verified against live GitHub data, and an audit that scored the drift. Here's the whole trail.</p>
+    <div class="stat-row">
+      <span class="stat ok"><span class="dot"></span>keel-gate: brief OK</span>
+      <span class="stat ok"><span class="dot"></span>keel.audit: 0 critical findings</span>
+      <span class="stat brass"><span class="dot"></span>6/6 assumptions traced into shipped code</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn primary" href="#story" data-goatcounter-click="showcase-read-story">Read the story ↓</a>
+      <a class="btn ghost" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-browse-source">Browse the source →</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap" id="story">
+<div class="spine">
+
+  <div class="beat" id="problem">
+    <span class="step-label">The problem statement</span>
+    <h3>A solo founder's Friday chore</h3>
+    <div class="beat-body">
+      <p><strong>The idea:</strong> ShipLog — a founder enters their public GitHub username and gets a draft weekly "build in public" update, generated from real commits, merged PRs, and releases over the last 7 days. They review and edit it before anything goes anywhere. It never posts on their behalf.</p>
+      <p><strong>The belief:</strong> solo founders who build in public lose real time every week doing the same manual chore — reconstructing what they actually shipped from their own commit history, then writing it up. The reconstruction step, not the writing, is what a tool could remove — as long as the founder still controls what comes out the other end.</p>
+      <p><strong>Why now, honestly:</strong> mostly founder intuition, not evidence yet — the hypothesis says so explicitly. GitHub's public API makes the data reachable without auth, and "build in public" is a common habit, but neither confirms the chore is painful enough, or that founders would trust a machine-drafted first pass. That's what discovery exists to find out before any of it becomes a spec.</p>
+    </div>
+  </div>
+
+  <div class="beat" id="evidence">
+    <span class="step-label">The interviews</span>
+    <h3>Four conversations, two roles, one real contradiction</h3>
+    <p class="beat-lede">Keel derived six assumptions the idea depends on, then a non-leading interview guide. Four interviews later, the gate had what it needed — and one belief didn't survive contact with the evidence.</p>
+    <div class="beat-body">
+      <div class="disclosure">
+        <span class="mk">DISCLOSED</span>
+        <span>Every interview below is <strong>synthetic</strong> — written to exercise Keel's gate for this run, not collected from real people. <code>commands/add-evidence.md</code> is explicit that the command "processes one real interview, it does not simulate one" — this run deliberately does the thing it says not to, to test the machinery, and says so in <code>keel/decisions.md</code>. Nothing here is evidence real founders want this.</span>
+      </div>
+
+      <div class="interview">
+        <div class="interview-head"><div class="left"><span class="roletag">indie_founder</span><h4>E-001 — Founder-1</h4></div></div>
+        <div class="interview-body">
+          <div class="qa"><div class="q">Walk me through the last time you wrote a public progress update.</div><div class="a">"It usually takes me 30–40 minutes because I have to go back through my own commits and PRs to remember what actually happened that week. I scroll my repo's commit list and closed PRs — it's the only accurate record I have."</div></div>
+          <div class="claimlist"><div class="claim support"><b>→ A-001</b><span>supports — observed recurring behavior, not stated preference</span></div></div>
+        </div>
+      </div>
+
+      <div class="interview">
+        <div class="interview-head"><div class="left"><span class="roletag">indie_founder</span><h4>E-002 — Founder-2</h4></div></div>
+        <div class="interview-body">
+          <div class="qa"><div class="q">Would you ever let a summary of your work go out without reading it first?</div><div class="a">"Never. I wouldn't let anything with my name on it go out unread — even something a cofounder wrote. And commit messages don't say why I rebuilt the whole billing flow — that's the actual story. A summary that just lists commits reads like a changelog, not an update."</div></div>
+          <div class="claimlist">
+            <div class="claim support"><b>→ A-002</b><span>supports strongly — a stated principle, not a hedge</span></div>
+            <div class="claim contra"><b>→ A-003</b><span>contradicts — raw activity described as accurate but hollow</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="interview">
+        <div class="interview-head"><div class="left"><span class="roletag">buildinpublic_reader</span><h4>E-003 — Reader-1</h4></div></div>
+        <div class="interview-body">
+          <div class="qa"><div class="q">What makes you actually read someone's weekly update versus skip it?</div><div class="a">"If it's just a list of commits I skip it — I follow people for the story, what they struggled with, what they decided. I do read the ones that feel like a real person made a call about something."</div></div>
+          <div class="claimlist">
+            <div class="claim contra"><b>→ A-003</b><span>contradicts — second independent role, same direction</span></div>
+            <div class="claim support"><b>→ A-004</b><span>supports, conditionally — engagement tied to narrative, not speed</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="interview">
+        <div class="interview-head"><div class="left"><span class="roletag">indie_founder</span><h4>E-004 — Founder-3</h4></div></div>
+        <div class="interview-body">
+          <div class="qa"><div class="q">Have you connected tools to your GitHub before — what did you check first?</div><div class="a">"I'd 100% read a draft before it went anywhere — my update goes to like 2,000 people, that's non-negotiable. I've connected read-only integrations before, didn't think twice about public-repo stuff. I'd be more careful about write access or private repos."</div></div>
+          <div class="claimlist">
+            <div class="claim support"><b>→ A-002</b><span>supports — third independent founder, stakes-based reasoning</span></div>
+            <div class="claim support"><b>→ A-005</b><span>supports, scope-matched to public read-only access</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="beat" id="gate">
+    <span class="step-label">The gate</span>
+    <h3>Not simulated — the actual script, against the actual evidence</h3>
+    <div class="beat-body">
+      <div class="tbl-scroll">
+        <table class="assump-tbl">
+          <colgroup><col style="width:66px"><col><col style="width:82px"><col style="width:104px"></colgroup>
+          <thead><tr><th>ID</th><th>Statement</th><th>Risk</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="idc">A-001</td><td class="stmt">Founders spend real, recurring time each week reconstructing shipped work into a shareable update.</td><td><span class="risk-badge high">high</span></td><td><span class="status-badge supported">supported</span></td></tr>
+            <tr><td class="idc">A-002</td><td class="stmt">A machine-drafted update is only usable if the founder can review and edit it first — not if it posts on their behalf.</td><td><span class="risk-badge high">high</span></td><td><span class="status-badge supported">supported</span></td></tr>
+            <tr><td class="idc">A-003</td><td class="stmt">Public GitHub activity alone carries enough signal for a genuinely useful first draft.</td><td><span class="risk-badge medium">medium</span></td><td><span class="status-badge contradicted">contradicted</span></td></tr>
+            <tr><td class="idc">A-004</td><td class="stmt">Founders would keep using this weekly, not try it once and drop it.</td><td><span class="risk-badge medium">medium</span></td><td><span class="status-badge supported">supported</span></td></tr>
+            <tr><td class="idc">A-005</td><td class="stmt">Founders are comfortable with public, read-only, unauthenticated GitHub access.</td><td><span class="risk-badge low">low</span></td><td><span class="status-badge open">open</span></td></tr>
+            <tr><td class="idc">A-006</td><td class="stmt">A founder-editable context field is necessary — raw activity alone reads as a changelog.</td><td><span class="risk-badge medium">medium</span></td><td><span class="status-badge supported">supported</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tbl-hint">Swipe to see all columns →</p>
+      <div class="term">$ bash .specify/extensions/keel/scripts/bash/keel-gate.sh brief
+evidence files: 4   distinct participant roles: 2   unvalidated high-risk: 0   contradictions: 1
+NOTE: superseded (contradicted and replaced) recorded in keel/decisions.md for: A-003 (excluded from the count above, still surfaced by keel.audit).
+<span class="warn">WARNING: 1 open contradiction(s). These must appear in the brief's unvalidated risks.</span>
+<span class="ok">keel-gate: brief OK</span></div>
+      <p>Two independent sources (E-002, E-003) contradicted A-003 — "GitHub activity alone carries enough signal." Rather than stretch its wording, the belief was replaced: <code>superseded: A-003</code> in <code>keel/decisions.md</code>, pointing to a new assumption, A-006. The context field this produced wasn't added later as polish — it's in the spec as a load-bearing requirement, traced straight back to this contradiction.</p>
+    </div>
+  </div>
+
+  <div class="beat" id="brief">
+    <span class="step-label">The artifacts</span>
+    <h3>Brief, constitution, spec — one traceable chain</h3>
+    <div class="beat-body">
+      <p><strong>What the evidence ruled out:</strong> a draft based on raw GitHub activity alone, presented as sufficient. Two independent sources called that output a changelog, not an update.</p>
+      <p><strong>What shipped instead:</strong> activity grouped by repo, paired with a founder-editable "why" field woven into the draft, and a review step that's structurally mandatory — three independent founders were unconditional on that point.</p>
+      <div class="tbl-scroll">
+        <table class="assump-tbl">
+          <colgroup><col style="width:74px"><col><col style="width:170px"></colgroup>
+          <thead><tr><th>Marker</th><th>Requirement</th><th>Verdict at audit</th></tr></thead>
+          <tbody>
+            <tr><td class="idc">A-001</td><td class="stmt">Fetch + present 7-day activity, grouped by repo, in an editable draft</td><td><span class="status-badge supported">OK</span></td></tr>
+            <tr><td class="idc">A-002</td><td class="stmt">Mandatory review; exactly 2 output actions; zero auto-transmit paths</td><td><span class="status-badge supported">OK — stronger than required</span></td></tr>
+            <tr><td class="idc">A-003</td><td class="stmt">Raw activity never presented alone as finished (superseded by A-006)</td><td><span class="status-badge supported">OK</span></td></tr>
+            <tr><td class="idc">A-005</td><td class="stmt">Public, read-only, unauthenticated GitHub access only</td><td><span class="status-badge supported">OK</span></td></tr>
+            <tr><td class="idc">A-006</td><td class="stmt">Always-visible context field, woven into the draft, not decorative</td><td><span class="status-badge supported">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12.8px; color:var(--ink-faint); margin-top:8px;">Checked by <code>grep</code> against the running code, not by matching filenames to requirement text — full table in <a href="https://github.com/keeldiscovery/shiplog/blob/main/keel/audit-report.md" target="_blank" rel="noopener"><code>keel/audit-report.md</code></a>.</p>
+    </div>
+  </div>
+
+  <div class="beat" id="build">
+    <span class="step-label">The build</span>
+    <h3>Constitution to converge, unmodified Spec Kit</h3>
+    <p class="beat-lede">Keel only surrounds Spec Kit's own pipeline — it never sits inside the build.</p>
+    <div class="beat-body">
+      <div class="pipeline">
+        <span class="pnode"><span class="n">✓</span>constitution</span>
+        <span class="pnode"><span class="n">✓</span>specify</span>
+        <span class="pnode"><span class="n">✓</span>plan</span>
+        <span class="pnode"><span class="n">✓</span>tasks</span>
+        <span class="pnode"><span class="n">✓</span>implement</span>
+        <span class="pnode flag"><span class="n">!</span>converge — found 1</span>
+        <span class="pnode"><span class="n">✓</span>keel.audit</span>
+      </div>
+      <div class="guide-lead">
+        <div class="glyph">!</div>
+        <div class="body">
+          <h3>What converge actually caught</h3>
+          <p>Copy and Export were reachable with an empty draft — before the first Generate, or after a failed lookup, both buttons were clickable and would silently act on nothing. Not a security issue, but a real crack in "mandatory review" — there was nothing to review. Fixed as task T035: both buttons now stay disabled until the draft has content. This is the pipeline's own safety net working, not a bug found from outside it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="beat" id="proof">
+    <span class="step-label">The outcome</span>
+    <h3>Proof it runs against real data</h3>
+    <p class="beat-lede">Driven with a real browser (headless Chromium) against the app actually running on localhost — real username, real GitHub API, zero console errors, zero mocks.</p>
+    <div class="beat-body">
+      <div class="shots">
+        <figure class="shot"><img src="img/shot-idle.png" alt="ShipLog before generating — username field, context field, empty draft area" loading="lazy"><figcaption>Idle — before Generate</figcaption></figure>
+        <figure class="shot"><img src="img/shot-generated.png" alt="ShipLog with a real draft generated for a live GitHub username, context field being filled in" loading="lazy"><figcaption>Generated for @sindresorhus in 9.1s, 42 live GitHub API calls (2 pagination + 40 enrichment, capped by design), context being woven in live</figcaption></figure>
+        <figure class="shot"><img src="img/shot-export.png" alt="ShipLog export confirmation after downloading the markdown file" loading="lazy"><figcaption>Export confirmed — a real .md file downloaded, named shiplog-update-2026-08-15.md</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<section id="fieldnotes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Field notes</div>
+      <h2>What running this for real actually found</h2>
+      <p>The point of this run was to find out if the documented flow holds up, not to make something look finished. Reported plainly, findings included.</p>
+    </div>
+
+    <div class="note-card">
+      <span class="tag doc">doc gap</span>
+      <div class="content"><h4>The site says <code>/speckit.keel.guide</code>. Reality says <code>/speckit-keel-guide</code>.</h4><p>Current Spec Kit CLI installs Claude Code <em>Skills</em> (<code>.claude/skills/*/SKILL.md</code>, dash-invoked), not the dot-separated <em>Commands</em> earlier docs assumed. The extension still installs and works correctly — only the invocation syntax was stale.</p></div>
+    </div>
+    <div class="note-card">
+      <span class="tag doc">doc gap</span>
+      <div class="content"><h4>"Verify it installed cleanly" doesn't work as written.</h4><p><code>./tests/test-install.sh</code> is deliberately stripped from what ships into a consumer project by <code>.extensionignore</code> — a maintainer check meant to run against the source repo, where it passed 39/39. It simply doesn't exist at the path the install instructions point to after a real <code>specify extension add</code>.</p></div>
+    </div>
+    <div class="note-card">
+      <span class="tag design">design risk</span>
+      <div class="content"><h4>The gate only enforces if someone remembers to run it.</h4><p><code>before_plan</code> and <code>after_implement</code> are registered as <em>optional</em> hooks, which this branch's skill files only surface, never auto-execute. Nothing stopped this run from going straight from a bare <code>/speckit-plan</code> to <code>/speckit-implement</code> without ever touching <code>keel-gate.sh</code> — it only enforced here because the run was disciplined to check by hand at each stage.</p></div>
+    </div>
+    <div class="note-card">
+      <span class="tag bug">real bug, caught</span>
+      <div class="content"><h4>GitHub's actual API payload doesn't match commonly-remembered docs.</h4><p><code>PushEvent.payload</code> on the real public events feed carries no commit-message array at all; a merged PR's title/URL/state are all <code>null</code> on the event itself. Written from memory instead of curled first, this would have shipped silently — commits with no messages, PRs with no titles. Caught by checking the live API before writing the parser, not after.</p></div>
+    </div>
+    <div class="note-card">
+      <span class="tag bug">real limit, hit twice</span>
+      <div class="content"><h4>60 requests/hour/IP is a real ceiling, not a footnote.</h4><p>Unauthenticated GitHub API access — the whole point of "no auth token required" — genuinely exhausted twice during this run, once from ordinary verification traffic. One digest for a prolific user alone can spend 40+ calls. The app degrades gracefully (a plain rate-limit message, not a crash), but the ceiling is real and low.</p></div>
+    </div>
+    <div class="note-card">
+      <span class="tag works">held up</span>
+      <div class="content"><h4>The gate script itself has no bugs.</h4><p>39/39 of its own tests pass, including parser edge cases (a literal <code>|</code> inside a statement, a supported row with an empty evidence column). Run here against a real multi-assumption scenario with a genuine contradiction and supersession, it computed every number correctly and blocked/passed exactly when it should have.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-final">
+      <h3>Run it yourself</h3>
+      <p>No build step, no install, no auth token. Clone it, or read the full evidence trail in the repo.</p>
+      <div class="codeblock" style="text-align:left; max-width:440px; margin:0 auto 20px;">
+        <pre id="c1">git clone https://github.com/keeldiscovery/shiplog.git
+cd shiplog/app && python3 -m http.server 8000</pre>
+        <button class="copybtn" data-target="c1">copy</button>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary" href="https://github.com/keeldiscovery/shiplog" target="_blank" rel="noopener" data-goatcounter-click="showcase-cta-repo">View the repo →</a>
+        <a class="btn ghost" href="/#install" data-goatcounter-click="showcase-cta-install">Install Keel on your own idea →</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg viewBox="0 0 32 24" fill="currentColor" aria-hidden="true"><path d="M2 8 C2 4, 30 4, 30 8 L25.5 8 C23.5 15.5, 19.5 20, 16 22 C12.5 20, 8.5 15.5, 6.5 8 Z"/></svg>
+          Keel
+        </a>
+        <p>Evidence-backed discovery upstream of <code>/speckit-specify</code>, and a check afterward that the build still matches what you learned.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-h">Project</span>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel">Source on GitHub</a>
+        <a href="https://github.com/keeldiscovery/spec-kit-keel/blob/main/README.md">README</a>
+        <a href="https://github.com/keeldiscovery/shiplog">ShipLog (this showcase)</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-h">License</span>
+        <span>Apache-2.0</span>
+        <span class="muted">The Keel name and logo aren't covered by the licence — forks are welcome and must rename.</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Keel Discovery</span>
+      <span>v0.2.0</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copybtn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var target = document.getElementById(btn.getAttribute('data-target'));
+    var text = target.textContent;
+    function done(){ btn.textContent='copied'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('copied'); }, 1400); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, done);
+    } else { done(); }
+  });
+});
+</script>
+</body>
+</html>
