@@ -320,18 +320,20 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
   <div class="wrap">
     <div class="eyebrow">Spec Kit Extension</div>
     <h1>Prove it, then build it.</h1>
-    <p class="dek">Keel is a guided discovery layer for Spec Kit. It won't
-    let an idea reach a spec until real interviews back it up — a script
-    that actually blocks, not a chatbot that agrees with you. Once it does,
-    Keel hands off to Spec Kit's own pipeline to build the thing for real,
-    and checks what shipped against what you learned.</p>
+    <p class="dek">Keel is a guided discovery layer for Spec Kit. It blocks
+    its own evidence-backed brief until real interviews back your idea up —
+    a script that actually exits non-zero, not a chatbot that agrees with
+    you. Once the brief exists, Keel hands off to Spec Kit's own pipeline
+    to build the thing for real, and checks what shipped against what you
+    learned.</p>
     <div class="cta-row">
       <a class="btn primary" href="#tryit" data-goatcounter-click="hero-try-flow">Try the flow ↓</a>
       <a class="btn ghost" href="#install" data-goatcounter-click="hero-install">Install →</a>
     </div>
     <p class="caveat">Keel doesn't write your code, and it won't pad
-    evidence to make its own gate pass. It just won't let you skip finding
-    out if you're right.</p>
+    evidence to make its own gate pass. It also can't stop you from
+    bypassing it and running Spec Kit directly — it just won't hand you a
+    brief that skips finding out if you're right.</p>
   </div>
   <div class="hero-diagram-band">
     <div class="wrap">
@@ -493,15 +495,21 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     </div>
     <div class="gate-callout">
       <div>
-        <h3>The gate actually enforces</h3>
+        <h3>The gate blocks the brief, by exit code</h3>
         <p><code>keel-gate.sh</code> runs at the top of every Keel command.
         <code>/speckit.keel.brief</code> is blocked while any high-risk
         assumption is unvalidated, evidence is thin, or all of it comes from
         a single participant role — not as a suggestion to your agent, as an
         exit code.</p>
-        <p style="margin-bottom:0;">Thresholds live in <code>keel-config.yml</code>.
-        You can lower them; the override gets recorded so <code>keel.audit</code>
-        can surface it later.</p>
+        <p>Thresholds live in <code>keel-config.yml</code>. You can lower
+        them; the override gets recorded so <code>keel.audit</code> can
+        surface it later.</p>
+        <p style="margin-bottom:0;">This only covers Keel's own commands —
+        it can't stop someone from skipping Keel entirely and running
+        <code>/speckit.specify</code> straight away. The hook that offers
+        to run <code>check</code> before planning is opt-in, not forced,
+        precisely so a project with no <code>keel/</code> directory is
+        never blocked by a gate it never opted into.</p>
       </div>
       <div class="term">$ bash keel-gate.sh brief
 evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   contradictions: 0
@@ -538,22 +546,18 @@ evidence files: 2   distinct participant roles: 2   unvalidated high-risk: 1   c
         <div>
           <div class="step">
             <span class="stepnum">1</span><h4>Install the extension</h4>
-            <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-install-cmd">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Not in Spec Kit's bundled catalog yet, so the bare <code>specify extension add keel</code> won't resolve — the command above installs straight from this repo. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
+            <div class="codeblock"><pre id="c1">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/tags/v0.2.0.zip</pre><button class="copybtn" data-target="c1" data-goatcounter-click="copy-install-cmd">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Keel is listed in Spec Kit's community catalog, but the entry is still syncing to v0.2.0 — until that update lands, the bare <code>specify extension add keel</code> will resolve the older v0.1.1. The command above installs the pinned v0.2.0 release directly, so you don't need to wait. Spec Kit will ask you to confirm the external source (<code>y</code>) once. Developing locally instead? <code>specify extension add --dev /path/to/spec-kit-keel</code></p>
           </div>
           <div class="step">
-            <span class="stepnum">2</span><h4>Verify it installed cleanly</h4>
-            <div class="codeblock"><pre id="c2">./tests/test-install.sh</pre><button class="copybtn" data-target="c2" data-goatcounter-click="copy-verify-cmd">copy</button></div>
-          </div>
-          <div class="step">
-            <span class="stepnum">3</span><h4>Confirm the commands are live</h4>
+            <span class="stepnum">2</span><h4>Confirm the commands are live</h4>
             <div class="codeblock"><pre id="c3">/speckit.keel.guide
 /speckit.keel.init
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
 /speckit.keel.audit</pre><button class="copybtn" data-target="c3" data-goatcounter-click="copy-commands-list">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them.</p>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent — nothing else in your workflow changes. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them. Shown here with dots — some agents register skill names with dashes instead (Claude Code shows this one as <code>/speckit-keel-guide</code>); it's the same command either way.</p>
           </div>
         </div>
       </div>
@@ -581,22 +585,18 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
           </div>
           <div class="step">
             <span class="stepnum">3</span><h4>Install the Keel extension</h4>
-            <div class="codeblock"><pre id="c7">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/heads/main.zip</pre><button class="copybtn" data-target="c7" data-goatcounter-click="copy-install-cmd-new">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Not in Spec Kit's bundled catalog yet, so the bare <code>specify extension add keel</code> won't resolve — the command above installs straight from this repo. Spec Kit will ask you to confirm the external source (<code>y</code>) once.</p>
+            <div class="codeblock"><pre id="c7">specify extension add keel --from https://github.com/keeldiscovery/spec-kit-keel/archive/refs/tags/v0.2.0.zip</pre><button class="copybtn" data-target="c7" data-goatcounter-click="copy-install-cmd-new">copy</button></div>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">Keel is listed in Spec Kit's community catalog, but the entry is still syncing to v0.2.0 — until that update lands, the bare <code>specify extension add keel</code> will resolve the older v0.1.1. The command above installs the pinned v0.2.0 release directly, so you don't need to wait.</p>
           </div>
           <div class="step">
-            <span class="stepnum">4</span><h4>Verify it installed cleanly</h4>
-            <div class="codeblock"><pre id="c8">./tests/test-install.sh</pre><button class="copybtn" data-target="c8" data-goatcounter-click="copy-verify-cmd-new">copy</button></div>
-          </div>
-          <div class="step">
-            <span class="stepnum">5</span><h4>Confirm the commands are live</h4>
+            <span class="stepnum">4</span><h4>Confirm the commands are live</h4>
             <div class="codeblock"><pre id="c9">/speckit.keel.guide
 /speckit.keel.init
 /speckit.keel.add-evidence
 /speckit.keel.check
 /speckit.keel.brief
 /speckit.keel.audit</pre><button class="copybtn" data-target="c9" data-goatcounter-click="copy-commands-list-new">copy</button></div>
-            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them.</p>
+            <p style="margin-top:8px; font-size:13.5px; color:var(--ink-faint);">These show up alongside your existing <code>/speckit.*</code> commands in your coding agent. Start with <code>/speckit.keel.guide</code> if you'd rather be walked through it; the other five are there directly whenever you want them. Shown here with dots — some agents register skill names with dashes instead (Claude Code shows this one as <code>/speckit-keel-guide</code>); it's the same command either way.</p>
           </div>
         </div>
       </div>
