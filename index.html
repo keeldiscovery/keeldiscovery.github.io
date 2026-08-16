@@ -146,22 +146,6 @@ nav.top .wrap{display:flex; align-items:center; justify-content:space-between; p
 @media (max-width:720px){ .outputs-grid{grid-template-columns:1fr 1fr;} }
 @media (max-width:480px){ .outputs-grid{grid-template-columns:1fr;} }
 
-/* ---------- technical-details disclosure (reused across novice-facing panels) ---------- */
-.tech-disclosure{margin-top:14px; border-top:1px solid var(--line-soft); padding-top:12px;}
-.tech-disclosure summary{
-  cursor:pointer; list-style:none; font-size:12.5px; font-weight:600; color:var(--ink-faint);
-  display:flex; align-items:center; gap:7px; user-select:none;
-}
-.tech-disclosure summary::-webkit-details-marker{display:none;}
-.tech-disclosure summary:hover{color:var(--brass);}
-.tech-disclosure .chev{
-  display:inline-block; width:7px; height:7px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
-  transform:rotate(45deg); transition:transform .15s ease; margin-top:-2px;
-}
-.tech-disclosure[open] summary .chev{transform:rotate(-135deg); margin-top:2px;}
-.tech-disclosure .term{margin-top:12px;}
-.idtag{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint);}
-
 /* ---------- sections ---------- */
 section{padding:64px 0; border-bottom:1px solid var(--line-soft);}
 section:last-of-type{border-bottom:none;}
@@ -255,72 +239,6 @@ section:last-of-type{border-bottom:none;}
 .copybtn:hover{color:#eef2ee; border-color:#5fc3ac;}
 .copybtn.copied{color:#7fd0b0; border-color:#7fd0b0;}
 
-/* try it */
-#tryit{background:var(--surface-2);}
-.stepper{display:flex; gap:8px; margin-bottom:30px; flex-wrap:wrap;}
-.pill{
-  display:flex; align-items:center; gap:8px; padding:7px 14px 7px 8px; border-radius:100px; background:var(--surface);
-  border:1px solid var(--line); font-size:13px; color:var(--ink-faint); font-weight:600;
-}
-.pill .num{width:20px; height:20px; border-radius:50%; background:var(--line-soft); color:var(--ink-faint); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:11px;}
-.pill.active{border-color:var(--brass); color:var(--brass);}
-.pill.active .num{background:var(--brass); color:var(--surface);}
-.pill.done{color:var(--ink);}
-.pill.done .num{background:var(--ink); color:var(--surface);}
-
-.scenario-card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px 26px; box-shadow:var(--shadow); margin-bottom:22px;}
-.scenario-card h3{font-size:18px; margin-bottom:10px;}
-.tbl-scroll{overflow-x:auto; margin-top:14px; -webkit-overflow-scrolling:touch; border-radius:8px;}
-.tbl-hint{display:none; font-size:12px; color:var(--ink-faint); margin-top:6px;}
-@media (max-width:660px){ .tbl-hint{display:block;} }
-.assump-tbl{width:100%; min-width:600px; border-collapse:collapse; font-size:13.8px; table-layout:fixed;}
-.assump-tbl th{text-align:left; font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-faint); padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap;}
-.assump-tbl td{padding:10px; border-bottom:1px solid var(--line-soft); vertical-align:top; white-space:nowrap;}
-.assump-tbl td.stmt{white-space:normal;}
-@media (max-width:600px){
-  .assump-tbl{font-size:13px;}
-}
-.risk-badge{font-family:var(--font-mono); font-size:11px; padding:2px 8px; border-radius:100px; font-weight:700;}
-.risk-badge.high{background:var(--rust-bg); color:var(--rust);}
-.risk-badge.medium{background:var(--brass-bg); color:var(--brass);}
-.status-badge{font-family:var(--font-mono); font-size:11.5px; padding:2px 9px; border-radius:100px; font-weight:600;}
-.status-badge.open{background:var(--line-soft); color:var(--ink-faint);}
-.status-badge.supported{background:var(--teal-bg); color:var(--teal);}
-.ev-ids{font-family:var(--font-mono); font-size:12px; color:var(--ink-soft);}
-
-.interview{background:var(--surface); border:1px solid var(--line); border-radius:12px; margin-bottom:14px; overflow:hidden;}
-.interview-head{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 20px; flex-wrap:wrap;}
-.interview-head .left{display:flex; align-items:center; gap:12px;}
-.roletag{font-family:var(--font-mono); font-size:11.5px; padding:3px 10px; border-radius:100px; background:var(--line-soft); color:var(--ink-soft); font-weight:600;}
-.interview-head h4{font-size:15px; margin:0; color:var(--ink);}
-.reveal-btn{
-  background:var(--ink); color:var(--surface); border:none; border-radius:7px; padding:8px 16px; font-size:13px; font-weight:700;
-}
-.reveal-btn:disabled{background:var(--line-soft); color:var(--ink-faint); cursor:not-allowed;}
-.interview-body{padding:0 20px 20px; display:none; flex-direction:column; gap:12px;}
-.interview-body.open{display:flex;}
-.qa{display:flex; flex-direction:column; gap:6px;}
-.qa .q{font-size:13.5px; color:var(--ink-faint); font-style:italic;}
-.qa .a{font-size:14.5px; color:var(--ink); background:var(--surface-2); border-left:3px solid var(--teal); padding:10px 14px; border-radius:0 6px 6px 0;}
-.claimlist{display:flex; flex-direction:column; gap:6px; margin-top:2px;}
-.claim{font-size:13px; color:var(--ink-soft); display:flex; gap:8px; align-items:baseline;}
-.claim b{color:var(--ink); font-family:var(--font-mono); font-size:12px;}
-
-.gate-panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px 24px; box-shadow:var(--shadow);}
-.gate-panel h3{font-size:17px; margin-bottom:12px;}
-.next-action{
-  margin-top:14px; padding:12px 14px; border-radius:8px; background:var(--teal-bg); color:var(--teal);
-  font-size:13.8px; font-weight:600;
-}
-.next-action.blocked{background:var(--rust-bg); color:var(--rust);}
-
-.brief-out{background:var(--surface); border:1px solid var(--teal); border-radius:12px; padding:24px 26px; margin-top:20px; box-shadow:var(--shadow); opacity:0.4; pointer-events:none; transition:opacity .3s;}
-.brief-out.unlocked{opacity:1; pointer-events:auto;}
-.brief-out h3{font-size:18px; color:var(--teal); margin-bottom:10px;}
-.brief-out h4{font-family:var(--font-body); font-size:13.5px; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-faint); margin:16px 0 6px;}
-.brief-out p{font-size:14.5px; color:var(--ink);}
-.locked-note{font-size:13px; color:var(--ink-faint); font-style:italic;}
-
 footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:var(--surface-2);}
 .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px;}
 .footer-brand .brand{margin-bottom:10px;}
@@ -350,7 +268,6 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
     </a>
     <div class="navlinks">
       <a href="#newfounder" data-goatcounter-click="nav-newfounder">New here?</a>
-      <a href="#tryit" data-goatcounter-click="nav-tryit">Worked example</a>
       <a href="#why" data-goatcounter-click="nav-why">Why alongside Spec Kit</a>
       <a href="#install" data-goatcounter-click="nav-install">Install</a>
       <a href="/showcase/" data-goatcounter-click="nav-showcase">Showcase</a>
@@ -509,98 +426,18 @@ footer{padding:52px 0 40px; border-top:1px solid var(--line-soft); background:va
       <div class="output-chip"><span class="dot"></span>Post-build drift audit</div>
     </div>
     <div class="cta-row" style="margin-top:32px;">
-      <a class="btn primary" href="#tryit" data-goatcounter-click="newfounder-worked-example">See a worked example ↓</a>
+      <a class="btn primary" href="/showcase/" data-goatcounter-click="newfounder-worked-example">See it run, start to finish →</a>
     </div>
   </div>
 </section>
 
-<section id="tryit">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Worked example — no install required</div>
-      <h2>Walk one discovery cycle end to end</h2>
-      <p class="measure">A fixed walkthrough, not a live input — reveal each
-      interview below to watch the assumptions, the decision, and the
-      recommendation update, using the same coverage/saturation math
-      <code>keel-gate.sh</code> runs for real.</p>
-    </div>
-
-    <div class="stepper" id="stepper"></div>
-
-    <div class="scenario-card">
-      <span class="tag" style="font-family:var(--font-mono); font-size:11px; color:var(--brass);">the idea</span>
-      <h3>TeamPulse Digest</h3>
-      <p style="color:var(--ink-soft); font-size:14.5px;">A Slack bot for engineering managers that reads standup
-      threads and drafts a weekly digest of progress, blockers, and risk —
-      with a mandatory human-review step before anything sends. Underlying
-      belief: managers lose real time every week reconstructing team status
-      by hand, and a reviewed draft would recover it without adding risk.</p>
-      <div class="tbl-scroll">
-        <table class="assump-tbl">
-          <colgroup>
-            <col><col style="width:82px"><col style="width:104px"><col style="width:104px">
-          </colgroup>
-          <thead><tr><th>Assumption</th><th>Risk</th><th>Evidence</th><th>Status</th></tr></thead>
-          <tbody id="assump-body"></tbody>
-        </table>
-      </div>
-      <p class="tbl-hint">Swipe to see all columns →</p>
-    </div>
-
-    <div class="scenario-card">
-      <h3 style="margin-bottom:14px;">Conduct the interviews</h3>
-      <div id="interviews"></div>
-    </div>
-
-    <div class="gate-panel">
-      <h3>Decision — what happens if you ran <code>/speckit.keel.brief</code> right now</h3>
-      <div class="next-action" id="next-action"></div>
-      <details class="tech-disclosure">
-        <summary>View command details <span class="chev" aria-hidden="true"></span></summary>
-        <div class="term" id="gate-term"></div>
-      </details>
-    </div>
-
-    <div class="brief-out" id="brief-out">
-      <h3>keel/brief.md</h3>
-      <h4>Evidence-backed problem statement</h4>
-      <p>Managers spend real, recurring weekly time reconstructing team status by hand.</p>
-      <h4>What to build</h4>
-      <p>A weekly digest with a <strong>mandatory</strong> human-review step before send — not a nice-to-have, the specific mechanism the evidence says makes an AI-authored summary acceptable at all.</p>
-      <h4>Residual risk carried into build</h4>
-      <p>The human-review-step assumption cleared the gate at "supported," not "validated," on exactly two roles. One of the two engineering managers trusted the review step only <em>conditionally</em> — treat initial rollout trust as earned per manager, not solved by shipping the review button.</p>
-      <details class="tech-disclosure">
-        <summary>Technical traceability <span class="chev" aria-hidden="true"></span></summary>
-        <p style="margin-top:10px; font-size:13px; color:var(--ink-faint);">Problem statement traces to <span class="idtag">A-001, E-001/E-003</span>. Build requirement traces to <span class="idtag">A-002, E-001/E-002/E-003</span>, marked <code>keel: A-001, A-002</code> in the brief itself. Residual-risk note references <span class="idtag">E-002</span>.</p>
-      </details>
-      <p class="locked-note" id="brief-locked">Unlocks once the decision above reads <strong>OK</strong>.</p>
-    </div>
-
-    <div style="margin-top:34px;">
-      <h3 style="font-size:17px; margin-bottom:10px;">Or run it for real</h3>
-      <p class="measure" style="color:var(--ink-soft); font-size:14.5px;">This walks the same five commands as the
-      worked example above, in your own project, once the extension is
-      installed — or paste just <code>/speckit.keel.init</code>'s argument
-      into <code>/speckit.keel.guide</code> and stay in one conversation; it
-      runs the same five phases and tells you when to paste the next
-      interview. <code>/speckit.keel.init</code> generates assumptions via
-      an LLM, so your actual wording won't match the fixed example above —
-      the mechanism (evidence extraction, gate math, decision menu) is
-      identical.</p>
-      <div class="codeblock">
-        <pre id="c4">/speckit.keel.init "TeamPulse Digest: a Slack bot for engineering managers that reads standup threads and drafts a weekly digest of progress, blockers, and risk, with a mandatory human-review step before anything sends. Belief: managers lose real time every week reconstructing team status by hand."
-
-/speckit.keel.add-evidence "Participant: engineering_manager (EM-1). Q: Walk me through the last time you told your manager what your team worked on last week. A: Every Friday I go through six different threads to figure out what shipped — it's an hour, every week. Also: if a bot drafted that and I could fix the two things it got wrong, I'd take that trade."
-
-/speckit.keel.add-evidence "Participant: engineering_manager (EM-2). Q: If someone handed you a draft summary of your team's week, what would you do with it before passing it along? A: If I'm the one who has to sign off, sure, I'd trust that more than something that fires off on its own. I might still double-check the first few, until I trust it."
-
-/speckit.keel.add-evidence "Participant: director (DIR-1). Q: How do you feel about a machine drafting your team's status report? A: As long as my EM has read it and signed off, I don't care who wrote the first draft. The review step is the whole thing for me."
-
-/speckit.keel.check
-
-/speckit.keel.brief</pre>
-        <button class="copybtn" data-target="c4" data-goatcounter-click="copy-all-demo-commands">copy all</button>
-      </div>
+<section id="showcase-teaser" style="background:var(--surface-2);">
+  <div class="wrap" style="text-align:center;">
+    <div class="eyebrow" style="color:var(--brass); font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Worked example</div>
+    <h2 style="font-size:clamp(24px,2.8vw,30px); max-width:34ch; margin:0 auto;">See a real run, start to finish</h2>
+    <p class="measure" style="color:var(--ink-soft); font-size:16px; margin:14px auto 0;">Not simulated. ShipLog is one real pass through Keel and Spec Kit: a hypothesis, four interviews, a gate that actually blocked and then passed, a shipped app, and an audit that scored the drift — with the synthetic-interview disclosure right up front.</p>
+    <div class="cta-row" style="justify-content:center; margin-top:24px;">
+      <a class="btn primary" href="/showcase/" data-goatcounter-click="tryit-teaser-showcase">Read the showcase →</a>
     </div>
   </div>
 </section>
@@ -819,167 +656,12 @@ cd my-project</pre><button class="copybtn" data-target="c6" data-goatcounter-cli
 
 <script>
 (function(){
-  var assumptions = {
-    'A-001': {statement:"Managers spend real, recurring time each week reading standups to reconstruct team status.", risk:'medium', evidence:[], status:'open'},
-    'A-002': {statement:"A mandatory human-review step is enough to make managers trust an AI-authored digest.", risk:'high', evidence:[], status:'open'}
-  };
-  var interviews = [
-    {
-      id:'E-001', role:'engineering_manager', roleLabel:'Engineering Manager', name:'EM-1',
-      q:"Walk me through the last time you told your manager what your team worked on last week.",
-      a:"“Every Friday I go through six different threads to figure out what shipped — it's an hour, every week. If a bot drafted that and I could just fix the two things it got wrong, I'd take that trade.”",
-      claims:[
-        {assumption:'A-001', note:'supports — observed, recurring behavior'},
-        {assumption:'A-002', note:'supports — stated preference, weaker than observed behavior'}
-      ],
-      effects:function(){ assumptions['A-001'].status='supported'; }
-    },
-    {
-      id:'E-002', role:'engineering_manager', roleLabel:'Engineering Manager', name:'EM-2',
-      q:"If someone handed you a draft summary of your team's week, what would you do with it before passing it along?",
-      a:"“If I'm the one who has to sign off, sure, I'd trust that more than something that fires off on its own. I might still double-check the first few, until I trust it.”",
-      claims:[
-        {assumption:'A-002', note:'supports, with a confidence note — trust needs a burn-in period'}
-      ],
-      effects:function(){ assumptions['A-002'].status='supported'; }
-    },
-    {
-      id:'E-003', role:'director', roleLabel:'Director', name:'DIR-1',
-      q:"How do you feel about a machine drafting your team's status report?",
-      a:"“As long as my EM has read it and signed off, I don't care who wrote the first draft. The review step is the whole thing for me.”",
-      claims:[
-        {assumption:'A-002', note:'supports — direct, from a second distinct role'}
-      ],
-      effects:function(){}
-    }
-  ];
-  var revealed = [false,false,false];
-
-  function evidenceCount(){ return revealed.filter(Boolean).length; }
-  function distinctRoles(){
-    var s = {};
-    interviews.forEach(function(iv,i){ if(revealed[i]) s[iv.role]=1; });
-    return Object.keys(s);
-  }
-  function recompute(){
-    assumptions['A-001'].evidence=[]; assumptions['A-001'].status='open';
-    assumptions['A-002'].evidence=[]; assumptions['A-002'].status='open';
-    interviews.forEach(function(iv,i){
-      if(!revealed[i]) return;
-      iv.claims.forEach(function(c){ assumptions[c.assumption].evidence.push(iv.id); });
-    });
-    interviews.forEach(function(iv,i){ if(revealed[i]) iv.effects(); });
-  }
-
-  function renderAssumptions(){
-    var body=document.getElementById('assump-body');
-    body.innerHTML='';
-    Object.keys(assumptions).forEach(function(id){
-      var a=assumptions[id];
-      var tr=document.createElement('tr');
-      tr.innerHTML =
-        '<td class="stmt">'+a.statement+' <span class="idtag">('+id+')</span></td>'+
-        '<td><span class="risk-badge '+a.risk+'">'+a.risk+'</span></td>'+
-        '<td class="ev-ids">'+(a.evidence.length? a.evidence.join(', ') : '—')+'</td>'+
-        '<td><span class="status-badge '+(a.status==='open'?'open':'supported')+'">'+a.status+'</span></td>';
-      body.appendChild(tr);
-    });
-  }
-
-  function renderInterviews(){
-    var wrap=document.getElementById('interviews');
-    wrap.innerHTML='';
-    interviews.forEach(function(iv,i){
-      var locked = i>0 && !revealed[i-1];
-      var card=document.createElement('div');
-      card.className='interview';
-      var claimsHtml = iv.claims.map(function(c){
-        return '<div class="claim">'+c.note+' <span class="idtag">→ '+c.assumption+'</span></div>';
-      }).join('');
-      card.innerHTML =
-        '<div class="interview-head">'+
-          '<div class="left"><span class="roletag">'+iv.roleLabel+'</span><h4>Interview with '+iv.name+'</h4></div>'+
-          '<button class="reveal-btn" '+(revealed[i]?'disabled':(locked?'disabled':''))+' data-i="'+i+'" data-goatcounter-click="demo-interview-'+iv.id+'">'+(revealed[i]?'Revealed':(locked?'Locked':'Conduct interview'))+'</button>'+
-        '</div>'+
-        '<div class="interview-body'+(revealed[i]?' open':'')+'">'+
-          '<div class="qa"><div class="q">Q: '+iv.q+'</div><div class="a">'+iv.a+'</div></div>'+
-          '<div class="claimlist">'+claimsHtml+'</div>'+
-          '<div class="idtag">Evidence ID: '+iv.id+'</div>'+
-        '</div>';
-      wrap.appendChild(card);
-    });
-    wrap.querySelectorAll('.reveal-btn:not([disabled])').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var i=parseInt(btn.getAttribute('data-i'),10);
-        revealed[i]=true;
-        recompute();
-        renderAll();
-      });
-    });
-  }
-
-  function renderGate(){
-    var ev=evidenceCount(), roles=distinctRoles(), minEv=3, minSrc=2;
-    var reasons=[];
-    if(ev<minEv) reasons.push('only '+ev+' evidence file(s), minimum is '+minEv+'.');
-    if(roles.length<minSrc) reasons.push('only '+roles.length+' distinct participant role(s), minimum is '+minSrc+'.');
-    var uhr = (assumptions['A-002'].status==='open') ? 1 : 0;
-    if(uhr>0) reasons.push(uhr+' high-risk assumption(s) still unvalidated.');
-    var term=document.getElementById('gate-term');
-    var lines=[];
-    lines.push('$ bash keel-gate.sh brief');
-    lines.push('evidence files: '+ev+'   distinct participant roles: '+roles.length+'   unvalidated high-risk: '+uhr+'   contradictions: 0');
-    if(reasons.length){
-      reasons.forEach(function(r){ lines.push('<span class="rust">BLOCKED: '+r+'</span>'); });
-    } else {
-      lines.push('<span class="ok">keel-gate: brief OK</span>');
-    }
-    term.innerHTML = lines.join('\n');
-
-    var na=document.getElementById('next-action');
-    var pass = reasons.length===0;
-    na.className = 'next-action'+(pass?'':' blocked');
-    var msg;
-    if(ev===0) msg='Interview at least one participant — currently zero evidence exists.';
-    else if(roles.length<2) msg='Interview someone in a role not yet represented — currently all evidence is from engineering_manager.';
-    else if(!pass) msg='Add one more interview before /speckit.keel.brief will pass.';
-    else msg='Coverage and saturation both look solid — run /speckit.keel.brief.';
-    na.textContent = (pass?'Recommended next action: ':'Blocked — ')+msg;
-
-    document.getElementById('brief-out').classList.toggle('unlocked', pass);
-    document.getElementById('brief-locked').style.display = pass ? 'none' : 'block';
-
-    if(pass && !window.__keelDemoCompleteLogged && window.goatcounter && window.goatcounter.count){
-      window.__keelDemoCompleteLogged = true;
-      window.goatcounter.count({path:'demo-completed-brief-unlocked', title:'Demo: brief unlocked', event:true});
-    }
-  }
-
-  function renderStepper(){
-    var labels=['Hypothesis','Interviews','Decision','Brief'];
-    var ev=evidenceCount();
-    var gateOk = ev>=3 && distinctRoles().length>=2 && assumptions['A-002'].status!=='open';
-    var stage;
-    if(ev===0) stage=1;
-    else if(gateOk) stage=4;
-    else if(ev===interviews.length) stage=3;
-    else stage=2;
-    var el=document.getElementById('stepper');
-    el.innerHTML = labels.map(function(l,i){
-      var n=i+1, cls = n<stage?'done':(n===stage?'active':'');
-      return '<div class="pill '+cls+'"><span class="num">'+n+'</span>'+l+'</div>';
-    }).join('');
-  }
-
-  function renderAll(){ renderAssumptions(); renderInterviews(); renderGate(); renderStepper(); }
-  renderAll();
-
   // copy buttons
   document.querySelectorAll('.copybtn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var target=document.getElementById(btn.getAttribute('data-target'));
       var text=target.textContent;
-      function done(){ btn.textContent='copied'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent=btn.getAttribute('data-target')==='c4'?'copy all':'copy'; btn.classList.remove('copied'); },1400); }
+      function done(){ btn.textContent='copied'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('copied'); },1400); }
       if(navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
       } else { fallbackCopy(text); done(); }
