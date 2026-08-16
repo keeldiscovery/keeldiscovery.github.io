@@ -452,14 +452,6 @@ NOTE: superseded (contradicted and replaced) recorded in keel/decisions.md for: 
     </div>
 
     <div class="note-card">
-      <span class="tag doc">doc gap</span>
-      <div class="content"><h4>The site says <code>/speckit.keel.guide</code>. Reality says <code>/speckit-keel-guide</code>.</h4><p>Current Spec Kit CLI installs Claude Code <em>Skills</em> (<code>.claude/skills/*/SKILL.md</code>, dash-invoked), not the dot-separated <em>Commands</em> earlier docs assumed. The extension still installs and works correctly — only the invocation syntax was stale.</p></div>
-    </div>
-    <div class="note-card">
-      <span class="tag doc">doc gap</span>
-      <div class="content"><h4>"Verify it installed cleanly" doesn't work as written.</h4><p><code>./tests/test-install.sh</code> is deliberately stripped from what ships into a consumer project by <code>.extensionignore</code> — a maintainer check meant to run against the source repo, where it passed 39/39. It simply doesn't exist at the path the install instructions point to after a real <code>specify extension add</code>.</p></div>
-    </div>
-    <div class="note-card">
       <span class="tag design">design risk</span>
       <div class="content"><h4>The gate only enforces if someone remembers to run it.</h4><p><code>before_plan</code> and <code>after_implement</code> are registered as <em>optional</em> hooks, which this branch's skill files only surface, never auto-execute. Nothing stopped this run from going straight from a bare <code>/speckit-plan</code> to <code>/speckit-implement</code> without ever touching <code>keel-gate.sh</code> — it only enforced here because the run was disciplined to check by hand at each stage.</p></div>
     </div>
